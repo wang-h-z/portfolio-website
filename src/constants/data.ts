@@ -30,7 +30,7 @@ export const experiences: Experience[] = [
   }
 ];
   
-  export const projects = [
+  export const projects: Project[] = [
     {
       title: 'E-commerce Platform',
       description: 'A full-featured online store built with React and Node.js',

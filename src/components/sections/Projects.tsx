@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { projects } from '@/constants/data';
+import type { Project } from '@/types';
 
 export default function Projects() {
   return (
@@ -12,7 +13,7 @@ export default function Projects() {
           Featured Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {projects.map((project: Project, index: number) => (
             <motion.div 
               key={index}
               className="bg-zinc-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
@@ -24,7 +25,7 @@ export default function Projects() {
               <h3 className="text-xl font-bold mb-2 text-zinc-900">{project.title}</h3>
               <p className="text-zinc-600 mb-4">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech, techIndex) => (
+                {project.technologies.map((tech: string, techIndex: number) => (
                   <span 
                     key={techIndex}
                     className="px-3 py-1 bg-zinc-200 text-zinc-700 text-sm rounded-full"
