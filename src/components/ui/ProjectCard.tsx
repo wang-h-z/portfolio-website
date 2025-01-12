@@ -11,7 +11,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   return (
-    <Card className="h-full flex flex-col overflow-hidden">
+    <Card className="h-full flex flex-col overflow-hidden shadow-md">
       {/* Black strip at the top - using margin to counter Card padding */}
       <div className="-mx-6 -mt-6 h-2 bg-gradient-to-r from-zinc-700 to-zinc-900" />
       

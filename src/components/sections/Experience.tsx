@@ -9,10 +9,11 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
-import { fadeInUp } from '@/styles/animations';
 import { Work, School, Code, Language, Storage, Cloud, Group, Devices, Speed } from '@mui/icons-material';
-import { experiences, stripColors } from '@/constants/data';
+import { experiences, stripColors, contentVariants } from '@/constants/data';
 import ExperienceCard from '@/components/ui/ExperienceCard';
+import Section from '../ui/Section';
+import { slideAnimation } from '@/styles/animations';
 
 const getIcon = (iconName: string) => {
   switch (iconName) {
@@ -33,17 +34,20 @@ const getTechIcon = (index: number) => {
 };
 
 export default function Experience() {
+
   return (
-    <motion.section 
-      id="experience"
-      className="py-20 px-8 bg-zinc-50"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeInUp}
-    >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center text-zinc-900">My Journey</h2>
+    <Section id="experience" bgColor="light">
+      <div className="max-w-4xl mx-auto w-full">
+        <motion.h2 
+          className="text-3xl font-bold mb-12 text-center text-zinc-900"
+          variants={slideAnimation}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+        >
+          My Journey
+        </motion.h2>
+        
         <Timeline position="alternate">
           {experiences.map((experience, index) => (
             <TimelineItem key={index}>
@@ -54,14 +58,17 @@ export default function Experience() {
                 <TimelineDot sx={{ bgcolor: 'rgb(24, 24, 27)' }}>
                   {getIcon(experience.icon)}
                 </TimelineDot>
-                {index < experiences.length - 1 && <TimelineConnector sx={{ bgcolor: 'rgb(24, 24, 27)' }} />}
+                {index < experiences.length - 1 && (
+                  <TimelineConnector sx={{ bgcolor: 'rgb(24, 24, 27)' }} />
+                )}
               </TimelineSeparator>
               <TimelineContent>
                 <motion.div 
-                  initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                  variants={slideAnimation}
+                  custom={index % 2 !== 0} // Pass whether it's on the left side
                 >
                   <ExperienceCard 
                     experience={experience}
@@ -75,6 +82,6 @@ export default function Experience() {
           ))}
         </Timeline>
       </div>
-    </motion.section>
+    </Section>
   );
 }

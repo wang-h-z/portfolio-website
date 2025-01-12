@@ -5,40 +5,34 @@ import { motion } from 'framer-motion';
 import { projects } from '@/constants/data';
 import type { Project } from '@/types';
 import ProjectCard from '@/components/ui/ProjectCard';
-import Button from '@/components/ui/Button';
-import { fadeInUp, staggerContainer } from '@/styles/animations';
+import Section from '../ui/Section';
+import { contentVariants } from '@/constants/data';
 
 export default function Projects() {
   return (
-    <motion.section 
-      id="projects"
-      className="py-20 px-8 bg-zinc-50"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={staggerContainer}
-    >
+    <Section id="projects" bgColor="white">
       <div className="max-w-4xl mx-auto">
         <motion.h2 
           className="text-3xl font-bold mb-12 text-center text-zinc-900"
-          variants={fadeInUp}
+          variants={contentVariants}
         >
           Featured Projects
         </motion.h2>
+        
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          variants={staggerContainer}
+          variants={contentVariants}
         >
           {projects.map((project: Project, index: number) => (
             <motion.div 
               key={index}
-              variants={fadeInUp}
+              variants={contentVariants}
             >
               <ProjectCard project={project} index={index} />
             </motion.div>
           ))}
         </motion.div>
       </div>
-    </motion.section>
+    </Section>
   );
 }

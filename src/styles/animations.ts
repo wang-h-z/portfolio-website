@@ -43,3 +43,24 @@ export const fadeInUp = {
       transition: { duration: 0.5 } 
     }
   };
+
+  export const slideAnimation = {
+    hidden: (isLeft: boolean) => ({
+      opacity: 0,
+      x: isLeft ? -20 : 20,
+      transition: {
+        type: "tween",
+        ease: "easeInOut",
+        duration: 0.6
+      }
+    }),
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "tween",
+        ease: "easeInOut",
+        duration: 0.6
+      }
+    }
+   } as const;
