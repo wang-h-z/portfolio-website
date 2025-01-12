@@ -9,17 +9,10 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import { fadeInUp } from '@/styles/animations';
 import { Work, School, Code, Language, Storage, Cloud, Group, Devices, Speed } from '@mui/icons-material';
-import { experiences } from '@/constants/data';
+import { experiences,  stripColors } from '@/constants/data';
 import type { Experience as ExperienceType } from '@/types';
-
-const stripColors = [
-  'from-blue-500 to-cyan-500',
-  'from-purple-500 to-pink-500',
-  'from-green-500 to-emerald-500',
-  'from-orange-500 to-yellow-500',
-  'from-red-500 to-rose-500',
-] as const;
 
 const getIcon = (iconName: string) => {
   switch (iconName) {
@@ -37,11 +30,6 @@ const getIcon = (iconName: string) => {
 const getTechIcon = (index: number) => {
   const icons = [Language, Storage, Cloud, Group, Devices, Speed];
   return icons[index % icons.length];
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
 export default function Experience() {

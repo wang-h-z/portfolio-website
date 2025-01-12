@@ -1,5 +1,13 @@
 import { Experience, Project } from '@/types';
 
+export const stripColors = [
+    'from-blue-500 to-cyan-500',
+    'from-purple-500 to-pink-500',
+    'from-green-500 to-emerald-500',
+    'from-orange-500 to-yellow-500',
+    'from-red-500 to-rose-500',
+  ]
+
 export const experiences: Experience[] = [
   {
     year: '2024',
