@@ -12,7 +12,6 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import { fadeInUp } from '@/styles/animations';
 import { Work, School, Code, Language, Storage, Cloud, Group, Devices, Speed } from '@mui/icons-material';
 import { experiences, stripColors } from '@/constants/data';
-import type { Experience as ExperienceType } from '@/types';
 import ExperienceCard from '@/components/ui/ExperienceCard';
 
 const getIcon = (iconName: string) => {

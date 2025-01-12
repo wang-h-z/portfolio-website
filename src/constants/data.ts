@@ -6,7 +6,7 @@ export const stripColors = [
     'from-green-500 to-emerald-500',
     'from-orange-500 to-yellow-500',
     'from-red-500 to-rose-500',
-  ]
+  ] as const;
 
 export const experiences: Experience[] = [
   {

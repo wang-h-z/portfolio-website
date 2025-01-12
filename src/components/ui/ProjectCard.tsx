@@ -11,12 +11,12 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   return (
-    <Card className="h-full flex flex-col">
-      {/* Color strip at the top */}
-      <div className="h-2 w-full bg-gradient-to-r from-zinc-700 to-zinc-900 rounded-t-xl -mt-6 -mx-6 mb-6" />
+    <Card className="h-full flex flex-col overflow-hidden">
+      {/* Black strip at the top - using margin to counter Card padding */}
+      <div className="-mx-6 -mt-6 h-2 bg-gradient-to-r from-zinc-700 to-zinc-900" />
       
       {/* Project Image */}
-      <div className="w-full h-48 mb-6">
+      <div className="w-full h-48 mt-6 mb-6">
         <img
           src={project.image || "/api/placeholder/400/200"}
           alt={project.title}
@@ -47,7 +47,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           ))}
         </div>
 
-        {/* Project Link - pushed to bottom */}
+        {/* Project Link */}
         <div className="mt-auto">
           <Button 
             href={project.link}
