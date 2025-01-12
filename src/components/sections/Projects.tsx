@@ -4,46 +4,41 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { projects } from '@/constants/data';
 import type { Project } from '@/types';
+import ProjectCard from '@/components/ui/ProjectCard';
+import Button from '@/components/ui/Button';
+import { fadeInUp, staggerContainer } from '@/styles/animations';
 
 export default function Projects() {
   return (
-    <section className="py-20 px-8" id="projects">
+    <motion.section 
+      id="projects"
+      className="py-20 px-8 bg-zinc-50"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={staggerContainer}
+    >
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center text-zinc-900">
+        <motion.h2 
+          className="text-3xl font-bold mb-12 text-center text-zinc-900"
+          variants={fadeInUp}
+        >
           Featured Projects
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        </motion.h2>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          variants={staggerContainer}
+        >
           {projects.map((project: Project, index: number) => (
             <motion.div 
               key={index}
-              className="bg-zinc-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              whileHover={{ y: -5 }}
+              variants={fadeInUp}
             >
-              <h3 className="text-xl font-bold mb-2 text-zinc-900">{project.title}</h3>
-              <p className="text-zinc-600 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech: string, techIndex: number) => (
-                  <span 
-                    key={techIndex}
-                    className="px-3 py-1 bg-zinc-200 text-zinc-700 text-sm rounded-full"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <a 
-                href={project.link} 
-                className="text-zinc-900 hover:text-zinc-600 transition-colors inline-flex items-center"
-              >
-                View Project →
-              </a>
+              <ProjectCard project={project} index={index} />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

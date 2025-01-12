@@ -11,8 +11,9 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import { fadeInUp } from '@/styles/animations';
 import { Work, School, Code, Language, Storage, Cloud, Group, Devices, Speed } from '@mui/icons-material';
-import { experiences,  stripColors } from '@/constants/data';
+import { experiences, stripColors } from '@/constants/data';
 import type { Experience as ExperienceType } from '@/types';
+import ExperienceCard from '@/components/ui/ExperienceCard';
 
 const getIcon = (iconName: string) => {
   switch (iconName) {
@@ -58,47 +59,17 @@ export default function Experience() {
               </TimelineSeparator>
               <TimelineContent>
                 <motion.div 
-                  className="relative bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                   initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 }}
                 >
-                  {/* Gradient strip at the top */}
-                  <div className={`h-2 bg-gradient-to-r ${stripColors[index % stripColors.length]} rounded-t-lg`} />
-                  
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-zinc-900">{experience.title}</h3>
-                    <h4 className="font-medium text-zinc-700 mt-1">{experience.company}</h4>
-                    <p className="text-zinc-600 mt-2">{experience.description}</p>
-                    
-                    {/* Technologies section */}
-                    <div className="mt-4 border-t border-zinc-100 pt-4">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {experience.technologies.map((tech, techIndex) => (
-                          <span 
-                            key={techIndex}
-                            className="px-3 py-1 bg-zinc-100 text-zinc-700 text-sm rounded-full"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      {/* Achievements with icons */}
-                      <div className="flex flex-wrap gap-4 mt-4">
-                        {experience.achievements.map((achievement, achIndex) => {
-                          const IconComponent = getTechIcon(achIndex);
-                          return (
-                            <div key={achIndex} className="flex items-center gap-1 text-zinc-600">
-                              <IconComponent className="w-4 h-4" />
-                              <span className="text-sm">{achievement}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
+                  <ExperienceCard 
+                    experience={experience}
+                    index={index}
+                    stripColor={stripColors[index % stripColors.length]}
+                    isLeft={index % 2 !== 0}
+                  />
                 </motion.div>
               </TimelineContent>
             </TimelineItem>

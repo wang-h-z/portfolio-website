@@ -4,6 +4,7 @@ export interface Experience {
     company: string;
     description: string;
     icon: string;
+    image?: string; 
     technologies: string[];
     achievements: string[];
   }
@@ -13,4 +14,5 @@ export interface Experience {
     description: string;
     technologies: string[];
     link: string;
+    image?: string; 
   }
