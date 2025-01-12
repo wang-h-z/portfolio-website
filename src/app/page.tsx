@@ -67,37 +67,39 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      {/* Hero Section */}
+{/* Hero Section */}
 <motion.section 
   initial="hidden"
   animate="visible"
   variants={fadeInUp}
   className="min-h-screen flex items-center justify-center p-8"
 >
-  <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-12">
     {/* Left side - Photo and caption */}
     <motion.div 
-      className="md:w-1/2 text-center md:text-left"
+      className="md:w-1/2 text-left"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.2 }}
     >
-      <div className="relative">
+      <div className="w-fit">
         <img 
           src="/api/placeholder/400/400"
           alt="Profile"
-          className="w-64 h-64 rounded-2xl object-cover shadow-lg mb-4"
+          className="w-64 h-64 rounded-3xl object-cover shadow-lg mb-4"
         />
-        <motion.div 
-          className="absolute -bottom-3 -right-3 bg-zinc-900 text-white px-4 py-2 rounded-lg shadow-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          Full Stack Developer
-        </motion.div>
+        <div className="mt-4">
+          <motion.div 
+            className="bg-zinc-900 text-white px-4 py-2 rounded-lg inline-block mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            Full Stack Developer
+          </motion.div>
+        </div>
+        <p className="text-zinc-600 text-lg">Based in San Francisco, CA</p>
       </div>
-      <p className="text-zinc-600 mt-6 text-lg">Based in San Francisco, CA</p>
     </motion.div>
 
     {/* Right side - Description */}
@@ -107,7 +109,7 @@ const Portfolio = () => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-zinc-900 to-zinc-500 bg-clip-text text-transparent">
+      <h1 className="text-5xl font-bold mb-6 text-zinc-900">
         John Doe
       </h1>
       <p className="text-xl text-zinc-600 mb-8 leading-relaxed">
@@ -131,13 +133,13 @@ const Portfolio = () => {
       <div className="flex gap-4">
         <a 
           href="#contact" 
-          className="px-6 py-3 bg-zinc-900 text-white rounded-lg hover:bg-zinc-800 transition-colors"
+          className="px-6 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-800 transition-colors"
         >
           Contact Me
         </a>
         <a 
           href="#projects" 
-          className="px-6 py-3 border border-zinc-900 text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors"
+          className="px-6 py-2 border border-zinc-900 text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors"
         >
           View Projects
         </a>
