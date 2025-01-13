@@ -5,7 +5,7 @@ export interface Experience {
     description: string;
     icon: string;
     image?: string; 
-    technologies: string[];
+    technologies: Technology[];
     achievements: string[];
   }
   
@@ -15,4 +15,9 @@ export interface Experience {
     technologies: string[];
     link: string;
     image?: string; 
+  }
+
+  export interface Technology {
+    name: string;
+    iconPath: string;
   }

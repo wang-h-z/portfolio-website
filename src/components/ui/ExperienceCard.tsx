@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@/components/ui/Card';
 import { Language, Storage, Cloud, Group, Devices, Speed } from '@mui/icons-material';
 import type { Experience } from '@/types';
+import TechIcon from './TechIcon';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -54,11 +55,11 @@ function getColorHex(colorClass: string) {
           <div className="mt-4">
               <div className={`flex items-center gap-4 mb-4 ${isLeft ? 'flex-row-reverse' : 'flex-row'}`}>
                   {/* Company/School Logo */}
-                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-zinc-100">
+                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-zinc-100 flex items-center justify-center">
                       <img
                           src={experience.image || "/api/placeholder/48/48"}
                           alt={experience.company}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain"
                       />
                   </div>
                   
@@ -75,14 +76,13 @@ function getColorHex(colorClass: string) {
               {/* Technologies section */}
               <div className="mt-4 border-t border-zinc-100 pt-4">
                   <div className={`flex flex-wrap gap-2 mb-3 ${isLeft ? 'justify-end' : 'justify-start'}`}>
-                      {experience.technologies.map((tech, techIndex) => (
-                          <span 
-                              key={techIndex}
-                              className="px-3 py-1 bg-zinc-100 text-zinc-700 text-sm rounded-full"
-                          >
-                              {tech}
-                          </span>
-                      ))}
+                    {experience.technologies.map((tech, techIndex) => (
+                      <TechIcon
+                        key={techIndex}
+                        name={tech.name}
+                        iconPath={tech.iconPath}
+                      />
+                    ))}
                   </div>
                   
                   {/* Achievements with icons */}
