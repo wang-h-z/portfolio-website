@@ -68,7 +68,7 @@ export default function Experience() {
                   whileInView="visible"
                   viewport={{ once: false }}
                   variants={slideAnimation}
-                  custom={index % 2 !== 0} // Pass whether it's on the left side
+                  custom={index % 2 !== 0} // pass whether it's on the left side
                 >
                   <ExperienceCard 
                     experience={experience}
