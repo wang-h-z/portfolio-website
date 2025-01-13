@@ -20,7 +20,7 @@ export default function Navbar() {
     }`}>
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <a href="#" className="text-xl font-bold text-zinc-900">JD</a>
+          <a href="#" className="text-xl font-bold text-zinc-900">WHZ</a>
           <div className="flex gap-8">
             <a href="#experience" className="text-zinc-600 hover:text-zinc-900 transition-colors">Experience</a>
             <a href="#projects" className="text-zinc-600 hover:text-zinc-900 transition-colors">Projects</a>

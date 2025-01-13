@@ -10,7 +10,7 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import { Work, School, Code, Language, Storage, Cloud, Group, Devices, Speed } from '@mui/icons-material';
-import { experiences, stripColors, contentVariants } from '@/constants/data';
+import { experiences, stripColors } from '@/constants/data';
 import ExperienceCard from '@/components/ui/ExperienceCard';
 import Section from '../ui/Section';
 import { slideAnimation } from '@/styles/animations';
@@ -28,10 +28,10 @@ const getIcon = (iconName: string) => {
   }
 };
 
-const getTechIcon = (index: number) => {
+/*const getTechIcon = (index: number) => {
   const icons = [Language, Storage, Cloud, Group, Devices, Speed];
   return icons[index % icons.length];
-};
+};*/
 
 export default function Experience() {
 
@@ -72,7 +72,6 @@ export default function Experience() {
                 >
                   <ExperienceCard 
                     experience={experience}
-                    index={index}
                     stripColor={stripColors[index % stripColors.length]}
                     isLeft={index % 2 !== 0}
                   />

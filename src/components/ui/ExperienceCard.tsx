@@ -5,7 +5,6 @@ import type { Experience } from '@/types';
 
 interface ExperienceCardProps {
   experience: Experience;
-  index: number;
   stripColor: string;
   isLeft: boolean; // Add this prop to determine position
 }
@@ -16,7 +15,7 @@ const getTechIcon = (index: number) => {
 };
 
 
-export default function ExperienceCard({ experience, index, stripColor, isLeft }: ExperienceCardProps) {
+export default function ExperienceCard({ experience, stripColor, isLeft }: ExperienceCardProps) {
 
 // Parse the stripColor to extract the colors
 const [fromColor, toColor] = stripColor.split(' ')
