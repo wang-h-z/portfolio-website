@@ -48,16 +48,22 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
         {/* Project Link */}
         <div className="mt-auto">
-          <Button 
-            href={project.link}
-            variant="outline"
-            className="w-full group flex items-center justify-center gap-2"
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-full"
           >
-            View Project
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-          </Button>
+            <Button 
+              variant="outline"
+              className="w-full group flex items-center justify-center gap-2"
+            >
+              View Project
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </Button>
+          </a>
         </div>
       </div>
     </Card>

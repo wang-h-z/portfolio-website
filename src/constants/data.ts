@@ -83,20 +83,22 @@ export const experiences: Experience[] = [
   export const projects: Project[] = [
     {
       title: 'SwipeStyle',
-      description: 'A full-featured online store built with React and Node.js',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      link: '#'
+      description: 'A clothing commerce IOS/Android app with a Tinder-esque UI built for shoppaholics to make faster and better purchasing decisions by leveraging a collaborative filtering recommendation system.',
+      technologies: ['React Native', 'TypeScript', 'Node.js', 'MongoDB', 'Supabase', 'Axios', 'Jest', 'TensorFlow Keras', 'Stripe'],
+      link: 'https://github.com/wang-h-z/SwipeStyle',
+      image: '/assets/projects/swipestyle-poster.png'
     },
     {
-      title: 'Social Media Dashboard',
-      description: 'Analytics dashboard for social media management',
-      technologies: ['React', 'TypeScript', 'Tailwind'],
-      link: '#'
+      title: 'CS2103T Team Project',
+      description: 'A property management CLI based application built for property agents.',
+      technologies: ['Java', 'JavaFX', 'Gradle', 'CodeCov', 'Github Pages'],
+      link: 'https://github.com/wang-h-z/tp',
+      image: '/assets/projects/cs2103t.png'
     },
     {
-      title: 'Mobile App',
+      title: 'C++ Stock Analyser',
       description: 'Cross-platform mobile application for fitness tracking',
-      technologies: ['React Native', 'Firebase'],
+      technologies: ['C++', 'Firebase'],
       link: '#'
     }
   ];
