@@ -1,4 +1,18 @@
 import { Experience, Project, Technology } from '@/types';
+import { 
+  DiJava } from 'react-icons/di';  // Devicons
+import { 
+  SiGradle,
+  SiCodecov,
+  SiNextdotjs,
+  SiReact,
+  SiNodedotjs,
+  SiTypescript,
+  SiMongodb,
+} from 'react-icons/si';  // Simple Icons
+
+// For JavaFX we might need to use a different icon since there's no direct JavaFX icon
+import { DiCode } from 'react-icons/di';  // Using this as a substitute for JavaFX
 
 export const stripColors = [
     'from-blue-500 to-cyan-500',
@@ -9,41 +23,37 @@ export const stripColors = [
   ] as const;
 
   export const technologies: { [key: string]: Technology } = {
-    'React': {
-      name: 'React',
-      iconPath: '/assets/tech-icons/react.png'
-    },
-    'Node.js': {
-      name: 'Node.js',
-      iconPath: '/assets/tech-icons/nodejs.png'
-    },
-    'TypeScript': {
-      name: 'TypeScript',
-      iconPath: '/assets/tech-icons/typescript.png'
-    },
-    'MongoDB': {
-      name: 'MongoDB',
-      iconPath: '/assets/tech-icons/mongodb.png'
-    },
-    'NextJS': {
-      name: 'NextJS',
-      iconPath: '/assets/tech-icons/nextjs.png'
-    },
     'Java': {
       name: 'Java',
-      iconPath:'/assets/tech-icons/java.png'
+      icon: DiJava
+    },
+    'Gradle': {
+      name: 'Gradle',
+      icon: SiGradle
     },
     'CodeCov': {
       name: 'CodeCov',
-      iconPath:'/assets/tech-icons/codecov.png'
+      icon: SiCodecov
     },
-    'JavaFX': {
-      name: 'JavaFX',
-      iconPath:'/assets/tech-icons/JavaFX.png'
+    'NextJS': {
+      name: 'NextJS',
+      icon: SiNextdotjs
     },
-    'Gradle': {
-      name:'Gradle',
-      iconPath:'/assets/tech-icons/gradle.png'
+    'React': {
+      name: 'React',
+      icon: SiReact
+    },
+    'Node.js': {
+      name: 'Node.js',
+      icon: SiNodedotjs
+    },
+    'TypeScript': {
+      name: 'TypeScript',
+      icon: SiTypescript
+    },
+    'MongoDB': {
+      name: 'MongoDB',
+      icon: SiMongodb
     }
   };
 
@@ -65,7 +75,7 @@ export const experiences: Experience[] = [
     description: 'Assist students by resolving technical issues and providing supplemental explanations for Software Engineering concepts.',
     icon: 'school',
     image: '/assets/experiences/nus.png',
-    technologies: [technologies['Java'], technologies['JavaFX'], technologies['Gradle'], technologies['CodeCov']],
+    technologies: [technologies['Java'], technologies['Gradle'], technologies['CodeCov']],
     achievements: ['API Design', 'Database Architecture', 'Performance'],
   },
   {

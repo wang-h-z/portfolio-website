@@ -80,7 +80,7 @@ function getColorHex(colorClass: string) {
                       <TechIcon
                         key={techIndex}
                         name={tech.name}
-                        iconPath={tech.iconPath}
+                        icon={tech.icon}
                       />
                     ))}
                   </div>

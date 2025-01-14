@@ -1,3 +1,5 @@
+import { IconType } from 'react-icons';
+
 export interface Experience {
     year: string;
     title: string;
@@ -17,7 +19,8 @@ export interface Experience {
     image?: string; 
   }
 
-  export interface Technology {
-    name: string;
-    iconPath: string;
-  }
+
+export interface Technology {
+  name: string;
+  icon: IconType; 
+}

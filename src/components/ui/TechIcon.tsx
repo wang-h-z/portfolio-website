@@ -3,13 +3,14 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { IconType } from 'react-icons';
 
 interface TechIconProps {
   name: string;
-  iconPath: string;
+  icon: IconType;
 }
 
-export default function TechIcon({ name, iconPath }: TechIconProps) {
+export default function TechIcon({ name, icon: Icon }: TechIconProps) {
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -19,16 +20,8 @@ export default function TechIcon({ name, iconPath }: TechIconProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Icon */}
-      <div className="w-10 h-10 rounded-full overflow-hidden bg-zinc-100">
-        <div className="relative w-full h-full">
-          <Image
-            src={iconPath}
-            alt={`${name} icon`}
-            fill
-            className="object-cover"
-            sizes="32px"
-          />
-        </div>
+      <div className="w-10 h-10 rounded-full bg-zinc-100 flex items-center justify-center">
+        <Icon size={24} className="text-zinc-700" />
       </div>
       
       {/* Sliding Text */}
