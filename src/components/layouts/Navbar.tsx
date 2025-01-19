@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="flex gap-8">
             <a href="#experience" className="text-zinc-600 hover:text-zinc-900 transition-colors">Experience</a>
             <a href="#projects" className="text-zinc-600 hover:text-zinc-900 transition-colors">Projects</a>
-            <a href="#contact" className="text-zinc-600 hover:text-zinc-900 transition-colors">Contact</a>
+            <a href="#socials" className="text-zinc-600 hover:text-zinc-900 transition-colors">Contact</a>
           </div>
         </div>
       </div>
