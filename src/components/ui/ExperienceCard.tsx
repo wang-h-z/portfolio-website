@@ -75,7 +75,7 @@ function getColorHex(colorClass: string) {
               
               {/* Technologies section */}
               <div className="mt-4 border-t border-zinc-100 pt-4">
-                  <div className={`flex flex-wrap gap-2 mb-3 ${isLeft ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`flex flex-wrap gap-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
                     {experience.technologies.map((tech, techIndex) => (
                       <TechIcon
                         key={techIndex}
@@ -83,19 +83,6 @@ function getColorHex(colorClass: string) {
                         icon={tech.icon}
                       />
                     ))}
-                  </div>
-                  
-                  {/* Achievements with icons */}
-                  <div className={`flex flex-wrap gap-4 mt-4 ${isLeft ? 'justify-end' : 'justify-start'}`}>
-                      {experience.achievements.map((achievement, achIndex) => {
-                          const IconComponent = getTechIcon(achIndex);
-                          return (
-                              <div key={achIndex} className="flex items-center gap-1 text-zinc-600">
-                                  <IconComponent className="w-4 h-4" />
-                                  <span className="text-sm">{achievement}</span>
-                              </div>
-                          );
-                      })}
                   </div>
               </div>
           </div>

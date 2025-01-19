@@ -9,7 +9,12 @@ import {
   SiNodedotjs,
   SiTypescript,
   SiMongodb,
-} from 'react-icons/si';  // Simple Icons
+  SiTailwindcss,
+  SiPython,
+  SiOpenai,
+  SiFlask,
+  SiTelegram,
+} from 'react-icons/si'; 
 
 // For JavaFX we might need to use a different icon since there's no direct JavaFX icon
 import { DiCode } from 'react-icons/di';  // Using this as a substitute for JavaFX
@@ -54,6 +59,26 @@ export const stripColors = [
     'MongoDB': {
       name: 'MongoDB',
       icon: SiMongodb
+    },
+    'TailWind': {
+      name: 'TailwindCSS',
+      icon: SiTailwindcss
+    },
+    'Python': {
+      name: 'Python',
+      icon: SiPython
+    },
+    'Flask': {
+      name: 'Flask',
+      icon: SiFlask
+    },
+    'Telegram': {
+      name: 'Telegram',
+      icon: SiTelegram
+    },
+    'OpenAI': {
+      name: 'OpenAI',
+      icon: SiOpenai
     }
   };
 
@@ -66,7 +91,6 @@ export const experiences: Experience[] = [
     icon: 'school',
     image: '/assets/experiences/nus.png',
     technologies: [technologies['Java']],
-    achievements: ['Team Leadership', 'System Architecture', 'CI/CD'],
   },
   {
     year: 'Jan 2025 - Present',
@@ -76,7 +100,6 @@ export const experiences: Experience[] = [
     icon: 'school',
     image: '/assets/experiences/nus.png',
     technologies: [technologies['Java'], technologies['Gradle'], technologies['CodeCov']],
-    achievements: ['API Design', 'Database Architecture', 'Performance'],
   },
   {
     year: 'August 2024 - Present',
@@ -85,12 +108,18 @@ export const experiences: Experience[] = [
     description: 'Developed a booking website for residents to book facilities and amentities.',
     icon: 'school',
     image: '/assets/experiences/rc4.png',
-    technologies: [technologies['NextJS']],
-    achievements: ['UI Development', 'Responsive Design', 'Version Control'],
+    technologies: [technologies['NextJS'], technologies['TailWind']],
   }
 ];
   
   export const projects: Project[] = [
+    {
+      title: 'ShowerBreak',
+      description: 'NUS HackNRoll 2025 submission. A Telegram Bot with a built in Chrome Extension to make daily shower reminders, shower tracking and content accessibility.',
+      technologies: ['Python', 'JavaScript', 'Flask', 'Supabase', 'OpenAI'],
+      link:'https://devpost.com/software/showerbreak',
+      image: '/assets/projects/showerbreak.png',
+    },
     {
       title: 'SwipeStyle',
       description: 'A clothing commerce IOS/Android app with a Tinder-esque UI built for shoppaholics to make faster and better purchasing decisions by leveraging a collaborative filtering recommendation system.',

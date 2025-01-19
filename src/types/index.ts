@@ -8,7 +8,6 @@ export interface Experience {
     icon: string;
     image?: string; 
     technologies: Technology[];
-    achievements: string[];
   }
   
   export interface Project {
