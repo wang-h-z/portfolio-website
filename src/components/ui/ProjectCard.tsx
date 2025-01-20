@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import type { Project } from '@/types';
@@ -15,11 +16,18 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       <div className="-mx-6 -mt-6 h-2 bg-gradient-to-r from-zinc-700 to-zinc-900" />
       
       {/* Project Image */}
-      <div className="w-full h-48 mt-6 mb-6">
-        <img
-          src={project.image || "/api/placeholder/400/200"}
+      <div className="relative w-full h-64 mt-6 mb-6">
+        <Image
+          src={project.image || "/api/placeholder/800/450"}
           alt={project.title}
-          className="w-full h-full object-cover rounded-lg"
+          fill
+          priority={index < 2} // Load first two images immediately
+          className="object-cover rounded-lg"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          quality={85}
+          style={{
+            objectPosition: 'center top' // This will favor the top of the image when cropping
+          }}
         />
       </div>
 
