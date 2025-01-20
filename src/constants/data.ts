@@ -135,10 +135,11 @@ export const experiences: Experience[] = [
       image: '/assets/projects/cs2103t.png'
     },
     {
-      title: 'C++ Stock Analyser',
-      description: 'Cross-platform mobile application for fitness tracking',
-      technologies: ['C++', 'Firebase'],
-      link: '#'
+      title: 'Full Stack Open',
+      description: 'My solutions for Full Stack Open course from the University of Helsinki.',
+      technologies: ['React', 'ExpressJS', 'NodeJS', 'MongoDB', 'Postman', 'PlayWright' ,'Redux'],
+      link: 'https://github.com/wang-h-z/fullstackopen',
+      image: '/assets/projects/certificate-fullstack.png'
     }
   ];
 
