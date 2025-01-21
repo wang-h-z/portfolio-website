@@ -10,31 +10,28 @@ import { contentVariants } from '@/constants/data';
 
 export default function Projects() {
   return (
-    <Section id="projects" bgColor="light">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <Section id="projects" bgColor="white">
+      <div className="max-w-4xl mx-auto">
         <motion.h2 
-          className="text-2xl sm:text-3xl font-bold text-zinc-900 mb-6 sm:mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          className="text-3xl font-bold mb-12 text-center text-zinc-900"
+          variants={contentVariants}
         >
-          Projects
+          Featured Projects
         </motion.h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {projects.map((project, index) => (
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          variants={contentVariants}
+        >
+          {projects.map((project: Project, index: number) => (
             <motion.div 
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.1 }}
-              style={{ minHeight: 0 }} // This helps prevent disappearing issues
+              variants={contentVariants}
             >
               <ProjectCard project={project} index={index} />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </Section>
   );
