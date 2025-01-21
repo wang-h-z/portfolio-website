@@ -7,7 +7,7 @@ interface SectionProps {
   children: React.ReactNode;
   id: string;
   className?: string;
-  bgColor?: 'white' | 'light'; // For alternating backgrounds
+  bgColor?: 'white' | 'light' | 'grey'; // For alternating backgrounds
 }
 
 const sectionVariants = {
