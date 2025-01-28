@@ -50,7 +50,7 @@ export default function Navbar() {
           <div className="hidden md:flex gap-8">
             <a href="#experience" className="text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:scale-105">Experience</a>
             <a href="#projects" className="text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:scale-105">Projects</a>
-            <a href="#contact" onClick={scrollToContact} className="text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:scale-105">Contact</a>
+            <a href="#socials" onClick={scrollToContact} className="text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:scale-105">Contact</a>
           </div>
 
           {/* Mobile menu */}
@@ -60,7 +60,7 @@ export default function Navbar() {
             <div className="py-2 px-4 space-y-2">
               <a href="#experience" className="block py-2 text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:translate-x-2">Experience</a>
               <a href="#projects" className="block py-2 text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:translate-x-2">Projects</a>
-              <a href="#contact" onClick={scrollToContact} className="block py-2 text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:translate-x-2">Contact</a>
+              <a href="#socials" onClick={scrollToContact} className="block py-2 text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:translate-x-2">Contact</a>
             </div>
           </div>
         </div>
