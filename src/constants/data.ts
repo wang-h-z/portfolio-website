@@ -87,7 +87,7 @@ export const experiences: Experience[] = [
     year: 'May 2025 - Present',
     title: 'Full Stack Developer Intern',
     company: 'Synapxe', 
-    description: 'Integrate Computer Vision and GenAI into Full Stack Systems',
+    description: 'Integrate Computer Vision and GenAI into Full Stack Systems.',
     icon: 'work',
     image: '/assets/experiences/synapxe.jpg',
     technologies: [],
