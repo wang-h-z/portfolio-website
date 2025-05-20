@@ -2,9 +2,11 @@
 
 import { useState, useEffect, MouseEvent } from 'react';
 import ThemeToggle from '@/components/ui/ThemeToggle';
+import { useTheme } from '@/lib/ThemeContext';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +26,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ease-in-out ${
+    <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ease-in-out ${
       isScrolled 
-        ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm' 
+        ? 'bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md shadow-sm' 
         : 'bg-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
