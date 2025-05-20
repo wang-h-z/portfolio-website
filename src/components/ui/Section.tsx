@@ -2,12 +2,13 @@
 
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useTheme } from '@/lib/ThemeContext';
 
 interface SectionProps {
   children: React.ReactNode;
   id: string;
   className?: string;
-  bgColor?: 'white' | 'light' | 'grey'; // For alternating backgrounds
+  bgColor?: 'white' | 'light' | 'grey' | 'dark'; // Added 'dark' as a valid option
 }
 
 const sectionVariants = {
@@ -28,7 +29,24 @@ const sectionVariants = {
 };
 
 export default function Section({ children, id, className = '', bgColor = 'white' }: SectionProps) {
-  const bgClass = bgColor === 'light' ? 'bg-zinc-50' : 'bg-white';
+  const { theme } = useTheme();
+  
+  // Updated to support dark mode for each bgColor option
+  let bgClass = '';
+  
+  switch (bgColor) {
+    case 'light':
+      bgClass = theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-50';
+      break;
+    case 'grey':
+      bgClass = theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100';
+      break;
+    case 'dark':
+      bgClass = 'bg-zinc-900 text-white';
+      break;
+    default: // 'white' is the default
+      bgClass = theme === 'dark' ? 'bg-zinc-950' : 'bg-white';
+  }
 
   return (
     <motion.section

@@ -5,9 +5,11 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Section from '@/components/ui/Section';
 import { contentVariants } from '@/constants/data';
+import { useTheme } from '@/lib/ThemeContext'; // Add this import
 
 export default function Hero() {
   const [isHovering, setIsHovering] = useState(false);
+  const { theme } = useTheme(); // Add this to access current theme
 
   // Image hover animation variant
   const imageHoverVariants = {
@@ -66,7 +68,7 @@ export default function Hero() {
   };
 
   return (
-    <Section id="hero" bgColor="white">
+    <Section id="hero" bgColor={theme === 'dark' ? 'dark' : 'white'}>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 min-h-[80vh]">
         <motion.div 
           className="md:w-1/2 text-left"
@@ -91,13 +93,13 @@ export default function Hero() {
               />
               {/* Decorative elements */}
               <motion.div 
-                className="absolute -z-10 w-full h-full bg-zinc-200 rounded-3xl -right-3 -bottom-3"
+                className="absolute -z-10 w-full h-full bg-zinc-200 dark:bg-zinc-700 rounded-3xl -right-3 -bottom-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isHovering ? 1 : 0 }}
                 transition={{ duration: 0.2 }}
               />
               <motion.div 
-                className="absolute -z-20 w-full h-full border-2 border-zinc-300 rounded-3xl right-6 bottom-6"
+                className="absolute -z-20 w-full h-full border-2 border-zinc-300 dark:border-zinc-600 rounded-3xl right-6 bottom-6"
                 variants={backgroundVariants}
                 initial="hidden"
                 animate={isHovering ? "animate" : "hidden"}
@@ -107,9 +109,9 @@ export default function Hero() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-md absolute bottom-8 left-4"
+              className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-md absolute bottom-8 left-4"
             >
-              <p className="text-zinc-600 text-lg">Y2 CS @ NUS</p>
+              <p className="text-zinc-600 dark:text-zinc-300 text-lg">Y2 CS @ NUS</p>
             </motion.div>
           </div>
         </motion.div>
@@ -122,7 +124,7 @@ export default function Hero() {
         >
           {/* Right Side */}
           <motion.div variants={textVariants}>
-            <h1 className="text-5xl font-bold mb-6 text-zinc-900 flex items-center gap-4">
+            <h1 className="text-5xl font-bold mb-6 text-zinc-900 dark:text-white flex items-center gap-4">
               Hi there!
               <motion.span 
                 className="inline-block"
@@ -134,7 +136,7 @@ export default function Hero() {
               </motion.span>
             </h1>
             <motion.p 
-              className="text-xl text-zinc-600 mb-8 leading-relaxed"
+              className="text-xl text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed"
               variants={textVariants}
             >
               I'm Haozhen, a CS undergrad from National University of Singapore.
@@ -146,10 +148,10 @@ export default function Hero() {
             >
               <a 
                 href="#projects" 
-                className="group relative px-6 py-3 bg-zinc-900 text-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg"
+                className="group relative px-6 py-3 bg-zinc-900 dark:bg-zinc-700 text-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg"
               >
                 <span className="relative z-10">View Projects</span>
-                <div className="absolute inset-0 w-0 bg-zinc-700 transition-all duration-300 ease-out group-hover:w-full" />
+                <div className="absolute inset-0 w-0 bg-zinc-700 dark:bg-zinc-600 transition-all duration-300 ease-out group-hover:w-full" />
               </a>
             </motion.div>
           </motion.div>
