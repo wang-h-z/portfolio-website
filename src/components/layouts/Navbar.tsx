@@ -2,11 +2,9 @@
 
 import { useState, useEffect, MouseEvent } from 'react';
 import ThemeToggle from '@/components/ui/ThemeToggle';
-import { useTheme } from '@/lib/ThemeContext';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
