@@ -10,25 +10,31 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Initialize theme from localStorage if available, otherwise default to 'light'
-  // or respect user's system preference
+  // Initialize theme from localStorage if available, otherwise default to system preference
   const [theme, setTheme] = useState<Theme>('light');
 
+  // This runs only on the client side after first render
   useEffect(() => {
-    // Check for saved theme preference or use system preference
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme) {
-      setTheme(savedTheme);
+    // Get stored theme or use system preference
+    const storedTheme = localStorage.getItem('theme') as Theme | null;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Set theme based on stored preference or system preference
+    if (storedTheme) {
+      setTheme(storedTheme);
     } else if (prefersDark) {
       setTheme('dark');
     }
   }, []);
 
+  // Update document class and localStorage when theme changes
   useEffect(() => {
-    // Apply theme class to document root when theme changes
-    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
     localStorage.setItem('theme', theme);
   }, [theme]);
 
