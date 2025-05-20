@@ -84,7 +84,16 @@ export const stripColors = [
 
 export const experiences: Experience[] = [
   {
-    year: 'Jan 2025 - Present',
+    year: 'May 2025 - Present',
+    title: 'Full Stack Developer Intern',
+    company: 'Synapxe', 
+    description: 'Integrate Computer Vision and GenAI into Full Stack Systems',
+    icon: 'work',
+    image: '/assets/experiences/synapxe.jpg',
+    technologies: [],
+  },
+  {
+    year: 'Jan 2025 - May 2025',
     title: 'CS2030S Teaching Assistant',
     company: 'NUS School of Computing',
     description: 'Mentor students in Functional and Object-Oriented Programming in Java.',
