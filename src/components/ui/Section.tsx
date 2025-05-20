@@ -50,7 +50,7 @@ export default function Section({ children, id, className = '', bgColor = 'white
   return (
     <motion.section
       id={id}
-      className={`min-h-screen flex items-center justify-center py-8 px-8 pt-14 ${bgClass} ${className}`}
+      className={`min-h-screen flex items-center justify-center py-20 px-8 pt-28 ${bgClass} ${className}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.3 }}
