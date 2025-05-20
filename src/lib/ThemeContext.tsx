@@ -1,3 +1,4 @@
+// src/lib/ThemeContext.tsx
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
@@ -9,7 +10,13 @@ interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+// Create a default context value
+const defaultContextValue: ThemeContextType = {
+  theme: 'light',
+  toggleTheme: () => console.warn("ThemeProvider not found!")
+};
+
+const ThemeContext = createContext<ThemeContextType>(defaultContextValue);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
@@ -47,13 +54,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
+  // Provide an actual context value
+  const contextValue = {
+    theme,
+    toggleTheme
+  };
+
   // Avoid rendering with incorrect theme to prevent hydration mismatch
   if (!mounted) {
     return <>{children}</>;
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );
@@ -61,9 +74,5 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
 // Custom hook to use the theme context
 export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+  return useContext(ThemeContext);
 }
