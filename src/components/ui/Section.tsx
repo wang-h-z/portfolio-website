@@ -8,7 +8,7 @@ interface SectionProps {
   children: React.ReactNode;
   id: string;
   className?: string;
-  bgColor?: 'white' | 'light' | 'grey' | 'dark'; // Added 'dark' as a valid option
+  bgColor?: 'white' | 'light' | 'grey' | 'dark';
 }
 
 const sectionVariants = {
@@ -31,7 +31,6 @@ const sectionVariants = {
 export default function Section({ children, id, className = '', bgColor = 'white' }: SectionProps) {
   const { theme } = useTheme();
   
-  // Updated to support dark mode for each bgColor option
   let bgClass = '';
   
   switch (bgColor) {
@@ -51,7 +50,7 @@ export default function Section({ children, id, className = '', bgColor = 'white
   return (
     <motion.section
       id={id}
-      className={`min-h-screen flex items-center justify-center py-20 px-8 ${bgClass} ${className}`}
+      className={`min-h-screen flex items-center justify-center py-8 px-8 pt-14 ${bgClass} ${className}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.3 }}
