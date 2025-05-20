@@ -1,9 +1,12 @@
 'use client';
 
 import { useState, useEffect, MouseEvent } from 'react';
+import ThemeToggle from '@/components/ui/ThemeToggle';
+import { useTheme } from '@/lib/ThemeContext';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,17 +27,20 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ease-in-out ${
-      isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
+      isScrolled 
+        ? 'bg-background/80 dark:bg-background/80 backdrop-blur-md shadow-sm' 
+        : 'bg-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center py-4">
-          <a href="#" className="text-xl font-bold text-zinc-900 transition-all duration-200 hover:scale-105">WHZ</a>
+          <a href="#" className="text-xl font-bold text-foreground transition-all duration-200 hover:scale-105">WHZ</a>
           
           {/* Desktop menu */}
-          <div className="flex gap-8">
-            <a href="#experience" className="text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:scale-105">Experience</a>
-            <a href="#projects" className="text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:scale-105">Projects</a>
-            <a href="#socials" onClick={handleContactClick} className="text-zinc-600 hover:text-zinc-900 transition-all duration-200 hover:scale-105">Contact</a>
+          <div className="flex items-center gap-8">
+            <a href="#experience" className="text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105">Experience</a>
+            <a href="#projects" className="text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105">Projects</a>
+            <a href="#socials" onClick={handleContactClick} className="text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105">Contact</a>
+            <ThemeToggle />
           </div>
         </div>
       </div>
