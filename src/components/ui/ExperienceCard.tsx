@@ -62,7 +62,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
   return (
     <motion.div 
       className="relative bg-white dark:bg-zinc-800 rounded-lg shadow-md overflow-hidden mb-4 
-                hover:shadow-lg transition-all duration-300"
+                 hover:shadow-lg transition-all duration-300"
       whileHover={{ 
         scale: 1.02,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
@@ -115,20 +115,43 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           </div>
         </div>
         
-        {/* Description with improved interaction */}
-        <div className="relative px-1 mb-4">
-          <div className={`text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed overflow-hidden ${isExpanded ? '' : 'max-h-10'}`}>
-            <p>{experience.description}</p>
-          </div>
+        {/* Description with subtle expand/collapse cue */}
+        <motion.div 
+          className="relative px-1 mb-4 cursor-pointer"
+          onClick={() => setIsExpanded(!isExpanded)}
+          whileHover={{ backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.01)' }}
+          animate={{ 
+            height: isExpanded ? 'auto' : '2.5rem' 
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Light indicator at the bottom for collapsed state */}
+          {!isExpanded && (
+            <div className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-white dark:from-zinc-800 to-transparent pointer-events-none"></div>
+          )}
           
-          {/* Improved read more button that doesn't overlap text */}
-          <div 
-            onClick={() => setIsExpanded(!isExpanded)} 
-            className="cursor-pointer mt-1 text-xs font-medium text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
-          >
-            {isExpanded ? 'Show less' : 'Read more'}
+          <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed">
+            {experience.description}
+          </p>
+          
+          {/* Subtle expansion indicator */}
+          <div className="flex justify-center mt-1">
+            <motion.div 
+              animate={{ 
+                rotate: isExpanded ? 180 : 0,
+                opacity: isExpanded ? 1 : 0.6
+              }}
+              transition={{ duration: 0.3 }}
+              className={`w-6 h-6 flex items-center justify-center rounded-full 
+                        bg-zinc-100 dark:bg-zinc-700 
+                        ${isExpanded ? 'mt-1' : '-mt-3'}`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-zinc-400 dark:text-zinc-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
         
         {/* Tech stack */}
         <AnimatePresence>
