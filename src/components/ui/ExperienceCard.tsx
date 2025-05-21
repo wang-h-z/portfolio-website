@@ -19,8 +19,7 @@ export default function ExperienceCard({ experience, stripColor, isLeft }: Exper
     <div className={`bg-white dark:bg-zinc-800 rounded-lg shadow-md overflow-hidden mb-4 ${isLeft ? 'mr-4' : 'ml-4'}`}>
       {/* Colored strip at the top */}
       <div 
-        className="h-2 w-full bg-gradient-to-r" 
-        style={{ background: stripColor }}
+        className={`h-2 w-full bg-gradient-to-r ${stripColor}`} 
       ></div>
       
       <div className="p-5">
