@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Experience } from '@/types';
@@ -14,23 +14,7 @@ interface ExperienceCardProps {
 
 export default function ExperienceCard({ experience, isLeft }: ExperienceCardProps) {
   const { theme } = useTheme();
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isOverflowing, setIsOverflowing] = useState(false);
-  const textRef = useRef<HTMLParagraphElement>(null);
-  
-  // Check if text is overflowing and needs the expand option
-  useEffect(() => {
-    const checkOverflow = () => {
-      if (textRef.current) {
-        const isTextOverflowing = textRef.current.scrollHeight > 40; // 2.5rem = 40px
-        setIsOverflowing(isTextOverflowing);
-      }
-    };
-    
-    checkOverflow();
-    window.addEventListener('resize', checkOverflow);
-    return () => window.removeEventListener('resize', checkOverflow);
-  }, [experience.description]);
+  const [showTech, setShowTech] = useState(false);
   
   // Calculate experience duration
   const getDuration = () => {
@@ -75,9 +59,12 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
     return '';
   };
   
+  // Only show the tech toggle if there are technologies
+  const hasTech = experience.technologies && experience.technologies.length > 0;
+  
   return (
     <motion.div 
-      className="relative bg-white dark:bg-zinc-800 rounded-lg shadow-md overflow-hidden mb-4 
+      className="relative bg-white dark:bg-zinc-800 rounded-lg shadow-md mb-4 
                  hover:shadow-lg transition-all duration-300"
       whileHover={{ 
         scale: 1.02,
@@ -131,67 +118,46 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           </div>
         </div>
         
-        {/* Description with properly positioned expansion elements */}
-        <div className="relative mb-4">
-          <motion.div 
-            className="relative overflow-hidden"
-            animate={{ 
-              height: isExpanded ? 'auto' : '2.5rem' 
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <p 
-              ref={textRef}
-              className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed"
-            >
-              {experience.description}
-            </p>
-          </motion.div>
-          
-          {/* Completely separate fade and chevron container - positioned below text */}
-          {isOverflowing && (
-            <div 
-              className="w-full cursor-pointer"
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
-              {!isExpanded && (
-                <div className="h-6 bg-gradient-to-t from-white dark:from-zinc-800 to-transparent w-full"></div>
-              )}
-              
-              <div className="flex justify-center mt-1">
-                <motion.div 
-                  animate={{ 
-                    rotate: isExpanded ? 180 : 0,
-                    opacity: isExpanded ? 1 : 0.6
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="w-6 h-6 flex items-center justify-center rounded-full 
-                            bg-zinc-100 dark:bg-zinc-700"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-zinc-400 dark:text-zinc-500" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </motion.div>
-              </div>
-            </div>
-          )}
+        {/* Description - no height constraints */}
+        <div className="mb-3">
+          <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed">
+            {experience.description}
+          </p>
         </div>
+        
+        {/* Tech stack toggle (only if there are technologies) */}
+        {hasTech && (
+          <div 
+            onClick={() => setShowTech(!showTech)}
+            className="flex items-center gap-1.5 cursor-pointer w-fit mt-1 mb-2"
+          >
+            <motion.div 
+              animate={{ rotate: showTech ? 180 : 0 }}
+              className="w-4 h-4 rounded-full bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-2.5 w-2.5 text-zinc-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </motion.div>
+            <span className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
+              {showTech ? 'Hide' : 'Show'} technologies
+            </span>
+          </div>
+        )}
         
         {/* Tech stack */}
         <AnimatePresence>
-          {isExpanded && experience.technologies && experience.technologies.length > 0 && (
+          {showTech && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
               transition={{ duration: 0.3 }}
+              className="overflow-hidden"
             >
               <div className="pt-2 border-t border-zinc-100 dark:border-zinc-700">
-                <p className="text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-2 font-medium">
-                  Technologies
-                </p>
                 <div className="flex flex-wrap gap-2">
-                  {experience.technologies.map((tech, i) => {
+                  {experience.technologies?.map((tech, i) => {
                     if (tech.icon) {
                       return <TechIcon key={i} name={tech.name} icon={tech.icon} />;
                     }
