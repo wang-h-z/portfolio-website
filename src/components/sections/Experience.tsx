@@ -9,12 +9,12 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
-import { Work, School, Code, Language, Storage, Cloud, Group, Devices, Speed } from '@mui/icons-material';
+import { Work, School, Code } from '@mui/icons-material';
 import { experiences, stripColors } from '@/constants/data';
 import ExperienceCard from '@/components/ui/ExperienceCard';
 import Section from '../ui/Section';
 import { slideAnimation } from '@/styles/animations';
-import { useTheme } from '@/lib/ThemeContext'; // Add this import
+import { useTheme } from '@/lib/ThemeContext';
 
 const getIcon = (iconName: string) => {
   switch (iconName) {
@@ -30,12 +30,12 @@ const getIcon = (iconName: string) => {
 };
 
 export default function Experience() {
-  const { theme } = useTheme(); // Add this to access the current theme
+  const { theme } = useTheme();
   
-  // Use theme to determine colors for MUI components
-  const dotColor = theme === 'dark' ? 'rgb(228, 228, 231)' : 'rgb(24, 24, 27)';
-  const dotTextColor = theme === 'dark' ? 'rgb(24, 24, 27)' : 'rgb(255, 255, 255)';
-  const connectorColor = theme === 'dark' ? 'rgb(161, 161, 170)' : 'rgb(24, 24, 27)';
+  // Set colors based on theme
+  const dotColor = theme === 'dark' ? '#e4e4e7' : '#27272a'; // zinc-200 for dark, zinc-800 for light
+  const dotTextColor = theme === 'dark' ? '#27272a' : '#ffffff'; // dark for text on light dot, white for text on dark dot
+  const connectorColor = theme === 'dark' ? '#a1a1aa' : '#27272a'; // zinc-400 for dark, zinc-800 for light
 
   return (
     <Section id="experience" bgColor="light">
@@ -53,7 +53,10 @@ export default function Experience() {
         <Timeline position="alternate">
           {experiences.map((experience, index) => (
             <TimelineItem key={index}>
-              <TimelineOppositeContent className="text-zinc-500 dark:text-zinc-400 font-medium">
+              <TimelineOppositeContent 
+                sx={{ color: theme === 'dark' ? '#a1a1aa' : '#71717a' }}
+                className="font-medium"
+              >
                 {experience.year}
               </TimelineOppositeContent>
               <TimelineSeparator>
@@ -77,7 +80,7 @@ export default function Experience() {
                 >
                   <ExperienceCard 
                     experience={experience}
-                    stripColor={theme === 'dark' ? getAdjustedStripColor(stripColors[index % stripColors.length]) : stripColors[index % stripColors.length]}
+                    stripColor={stripColors[index % stripColors.length]}
                     isLeft={index % 2 !== 0}
                   />
                 </motion.div>
@@ -88,17 +91,4 @@ export default function Experience() {
       </div>
     </Section>
   );
-}
-
-// Helper function to adjust strip colors for dark mode
-function getAdjustedStripColor(color: string): string {
-  // Optional function to adjust strip colors for better visibility in dark mode
-  // Could make colors brighter or more saturated
-  switch (color) {
-    case '#f97316': return '#fb923c'; // Brighten orange
-    case '#8b5cf6': return '#a78bfa'; // Brighten purple
-    case '#06b6d4': return '#22d3ee'; // Brighten cyan
-    case '#10b981': return '#34d399'; // Brighten emerald
-    default: return color;
-  }
 }
