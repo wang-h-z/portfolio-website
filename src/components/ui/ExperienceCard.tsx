@@ -45,7 +45,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
         const endMonthIndex = monthNames.indexOf(endMonth);
         
         if (startYear === endYear) {
-          return `${endMonthIndex - startMonthIndex}m`;
+          return `${endMonthIndex - startMonthIndex + 1}m`;
         } else {
           const years = endYear - startYear;
           const months = endMonthIndex - startMonthIndex;
