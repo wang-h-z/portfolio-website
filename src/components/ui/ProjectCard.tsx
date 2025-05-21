@@ -13,7 +13,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Card className="h-full flex flex-col overflow-hidden shadow-md">
       {/* Black strip at the top */}
-      <div className="-mx-6 -mt-6 h-2 bg-gradient-to-r from-zinc-700 to-zinc-900" />
+      <div className="-mx-6 -mt-6 h-2 bg-gradient-to-r from-zinc-700 to-zinc-800 dark:from-zinc-500 dark:to-zinc-600" />
       
       {/* Project Image */}
       <div className="relative w-full h-48 sm:h-64 mt-6 mb-6">
@@ -32,11 +32,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       </div>
 
       <div className="flex flex-col flex-grow">
-        <h3 className="text-lg sm:text-xl font-bold text-zinc-900 mb-3 sm:mb-4">
+        <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white mb-3 sm:mb-4">
           {project.title}
         </h3>
 
-        <p className="text-sm sm:text-base text-zinc-600 mb-4 sm:mb-6">
+        <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 mb-4 sm:mb-6">
           {project.description}
         </p>
 
@@ -44,7 +44,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           {project.technologies.map((tech: string, techIndex: number) => (
             <span 
               key={techIndex}
-              className="px-2 sm:px-3 py-1 bg-zinc-100 text-zinc-700 text-xs sm:text-sm rounded-full"
+              className="px-2 sm:px-3 py-1 bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm rounded-full"
             >
               {tech}
             </span>
