@@ -1,3 +1,4 @@
+// ExperienceCard.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -62,9 +63,14 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
   // Only show the tech section if there are technologies
   const hasTech = experience.technologies && experience.technologies.length > 0;
   
+  // Dynamic background based on theme
+  const cardBg = theme === 'dark' ? 'bg-zinc-900/95 dark:bg-zinc-900/95' : 'bg-white dark:bg-zinc-900/95';
+  const textColor = theme === 'dark' ? 'text-zinc-300 dark:text-zinc-300' : 'text-zinc-600 dark:text-zinc-300';
+  const headingColor = theme === 'dark' ? 'text-white dark:text-white' : 'text-zinc-900 dark:text-white';
+  
   return (
     <motion.div 
-      className={`relative bg-zinc-900/95 dark:bg-zinc-900/95 rounded-lg shadow-md mb-4 
+      className={`relative ${cardBg} rounded-lg shadow-md mb-4 
                  hover:shadow-lg transition-all duration-300 
                  ${hasTech ? 'cursor-pointer' : ''}`}
       whileHover={{ 
@@ -93,16 +99,16 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           )}
           
           <div className="flex-1">
-            <h3 className="text-lg font-bold text-white dark:text-white">
+            <h3 className={`text-lg font-bold ${headingColor}`}>
               {experience.title}
             </h3>
             <div className={`flex items-center gap-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
-              <p className="text-zinc-300 dark:text-zinc-300 text-sm">
+              <p className={textColor + " text-sm"}>
                 {experience.company}
               </p>
               
               {/* Duration badge */}
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-zinc-800 dark:bg-zinc-700 text-zinc-300 dark:text-zinc-300">
+              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -122,7 +128,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
         
         {/* Description - with consistent alignment */}
         <div className={`mb-3 ${isLeft ? 'text-right' : 'text-left'}`}>
-          <p className="text-zinc-300 dark:text-zinc-300 text-sm leading-relaxed">
+          <p className={`${textColor} text-sm leading-relaxed`}>
             {experience.description}
           </p>
         </div>
@@ -132,16 +138,16 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           <div className="flex justify-center mt-2 mb-1">
             <motion.div 
               animate={{ rotate: showTech ? 180 : 0 }}
-              className="w-6 h-6 rounded-full bg-zinc-800 dark:bg-zinc-700 flex items-center justify-center"
+              className="w-6 h-6 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-zinc-400" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-zinc-500 dark:text-zinc-400" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </motion.div>
           </div>
         )}
         
-        {/* Tech stack */}
+        {/* Tech stack with improved spacing */}
         <AnimatePresence>
           {showTech && hasTech && (
             <motion.div
@@ -151,8 +157,9 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
               transition={{ duration: 0.3 }}
               className="overflow-hidden"
             >
-              <div className="pt-2 border-t border-zinc-800 dark:border-zinc-700">
-                <div className={`flex flex-wrap gap-2 mt-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
+              <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800">
+                {/* Using flex with smaller gap */}
+                <div className={`flex flex-wrap gap-1.5 mt-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
                   {experience.technologies?.map((tech, i) => {
                     if (tech.icon) {
                       return <TechIcon key={i} name={tech.name} icon={tech.icon} />;
@@ -161,7 +168,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
                     return (
                       <span 
                         key={i} 
-                        className="inline-block px-2 py-1 text-xs rounded-full bg-zinc-800 dark:bg-zinc-700 text-zinc-300 dark:text-zinc-300"
+                        className="inline-block px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 whitespace-nowrap"
                       >
                         {tech.name}
                       </span>
