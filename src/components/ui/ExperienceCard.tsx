@@ -67,7 +67,6 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
         scale: 1.02,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
       }}
-      onClick={() => setIsExpanded(!isExpanded)}
       transition={{ duration: 0.2 }}
     >
       {/* Subtle colorful border on top - using gradient for visual interest without hardcoded colors */}
@@ -116,20 +115,19 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           </div>
         </div>
         
-        {/* Description with interaction */}
-        <div 
-          className={`relative px-1 mb-4 cursor-pointer ${isExpanded ? '' : 'line-clamp-2'}`}
-        >
-          <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed">
-            {experience.description}
-          </p>
+        {/* Description with improved interaction */}
+        <div className="relative px-1 mb-4">
+          <div className={`text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed overflow-hidden ${isExpanded ? '' : 'max-h-10'}`}>
+            <p>{experience.description}</p>
+          </div>
           
-          {/* Indicate there's more to read */}
-          {!isExpanded && (
-            <div className="absolute bottom-0 right-0 w-24 h-full bg-gradient-to-l from-white dark:from-zinc-800 to-transparent flex items-end justify-end">
-              <span className="text-xs text-zinc-400 dark:text-zinc-500 pr-1">read more</span>
-            </div>
-          )}
+          {/* Improved read more button that doesn't overlap text */}
+          <div 
+            onClick={() => setIsExpanded(!isExpanded)} 
+            className="cursor-pointer mt-1 text-xs font-medium text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+          >
+            {isExpanded ? 'Show less' : 'Read more'}
+          </div>
         </div>
         
         {/* Tech stack */}
