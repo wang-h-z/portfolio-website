@@ -59,17 +59,19 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
     return '';
   };
   
-  // Only show the tech toggle if there are technologies
+  // Only show the tech section if there are technologies
   const hasTech = experience.technologies && experience.technologies.length > 0;
   
   return (
     <motion.div 
-      className="relative bg-white dark:bg-zinc-800 rounded-lg shadow-md mb-4 
-                 hover:shadow-lg transition-all duration-300"
+      className={`relative bg-white dark:bg-zinc-800 rounded-lg shadow-md mb-4 
+                 hover:shadow-lg transition-all duration-300 
+                 ${hasTech ? 'cursor-pointer' : ''}`}
       whileHover={{ 
         scale: 1.02,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
       }}
+      onClick={() => hasTech && setShowTech(!showTech)}
       transition={{ duration: 0.2 }}
     >
       {/* Subtle colorful border on top - using gradient for visual interest without hardcoded colors */}
@@ -125,29 +127,23 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           </p>
         </div>
         
-        {/* Tech stack toggle (only if there are technologies) */}
+        {/* Tech indicator (chevron) - Only if there are technologies */}
         {hasTech && (
-          <div 
-            onClick={() => setShowTech(!showTech)}
-            className="flex items-center gap-1.5 cursor-pointer w-fit mt-1 mb-2"
-          >
+          <div className="flex justify-center mt-2 mb-1">
             <motion.div 
               animate={{ rotate: showTech ? 180 : 0 }}
-              className="w-4 h-4 rounded-full bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center"
+              className="w-6 h-6 rounded-full bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-2.5 w-2.5 text-zinc-500" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-zinc-500" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </motion.div>
-            <span className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
-              {showTech ? 'Hide' : 'Show'} technologies
-            </span>
           </div>
         )}
         
         {/* Tech stack */}
         <AnimatePresence>
-          {showTech && (
+          {showTech && hasTech && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
@@ -156,7 +152,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
               className="overflow-hidden"
             >
               <div className="pt-2 border-t border-zinc-100 dark:border-zinc-700">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-2">
                   {experience.technologies?.map((tech, i) => {
                     if (tech.icon) {
                       return <TechIcon key={i} name={tech.name} icon={tech.icon} />;
