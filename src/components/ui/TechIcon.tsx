@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconType } from 'react-icons';
 import { useTheme } from '@/lib/ThemeContext';
@@ -16,7 +17,7 @@ export default function TechIcon({ name, icon: Icon }: TechIconProps) {
 
   return (
     <div 
-      className="relative flex flex-col items-center"
+      className="relative flex flex-col items-center mt-2 mb-6"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -25,7 +26,7 @@ export default function TechIcon({ name, icon: Icon }: TechIconProps) {
         <Icon size={20} className="text-zinc-700 dark:text-zinc-200" />
       </div>
       
-      {/* Sliding Text */}
+      {/* Sliding Text - Making it smaller */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
@@ -33,7 +34,8 @@ export default function TechIcon({ name, icon: Icon }: TechIconProps) {
             animate={{ opacity: 1, y: 4 }}
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.15 }}
-            className="text-zinc-600 dark:text-zinc-300 text-xs font-medium tracking-wide absolute top-full pt-1 bg-white/90 dark:bg-zinc-800/90 px-2 py-0.5 rounded shadow-sm z-10"
+            className="text-zinc-600 dark:text-zinc-300 text-xs font-medium tracking-wide absolute top-full pt-1 bg-white/90 dark:bg-zinc-800/90 px-2 py-0.5 rounded"
+            style={{ zIndex: 20 }} // Ensure text appears above other elements
           >
             {name}
           </motion.div>
