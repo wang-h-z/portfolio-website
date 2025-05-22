@@ -147,7 +147,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           </div>
         )}
         
-        {/* Tech stack with improved spacing */}
+        {/* Tech stack */}
         <AnimatePresence>
           {showTech && hasTech && (
             <motion.div
@@ -155,11 +155,11 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
               animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
               exit={{ opacity: 0, height: 0, marginTop: 0 }}
               transition={{ duration: 0.3 }}
-              className="overflow-hidden"
+              className="overflow-visible" // Changed from overflow-hidden
             >
               <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800">
-                {/* Using flex with smaller gap */}
-                <div className={`flex flex-wrap gap-1.5 mt-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
+                {/* Using flex with smaller gap and padding */}
+                <div className={`flex flex-wrap gap-2 mt-2 py-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
                   {experience.technologies?.map((tech, i) => {
                     if (tech.icon) {
                       return <TechIcon key={i} name={tech.name} icon={tech.icon} />;
@@ -168,7 +168,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
                     return (
                       <span 
                         key={i} 
-                        className="inline-block px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 whitespace-nowrap"
+                        className="inline-block px-2 py-1 text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 whitespace-nowrap my-1"
                       >
                         {tech.name}
                       </span>

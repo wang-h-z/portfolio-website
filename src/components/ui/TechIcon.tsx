@@ -16,16 +16,17 @@ export default function TechIcon({ name, icon: Icon }: TechIconProps) {
   
   return (
     <div 
-      className="relative flex flex-col items-center mt-2 mb-3"
+      className="relative flex flex-col items-center mt-2 mb-6"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Icon */}
-      <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
-        <Icon size={18} className="text-zinc-700 dark:text-zinc-300" />
+      {/* Icon - increased from w-8/h-8 to w-9/h-9 (~12.5% increase) */}
+      <div className="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+        {/* Increased icon size from 18 to 20 (~11% increase) */}
+        <Icon size={20} className="text-zinc-700 dark:text-zinc-300" />
       </div>
       
-      {/* Sliding Text - transparent background with subtle shadow */}
+      {/* Sliding Text - no background, just text with shadow for readability */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
@@ -33,8 +34,14 @@ export default function TechIcon({ name, icon: Icon }: TechIconProps) {
             animate={{ opacity: 1, y: 4 }}
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.15 }}
-            className="text-zinc-800 dark:text-zinc-200 text-xs font-medium tracking-tight absolute top-full pt-1 shadow-sm px-2 py-0.5 rounded backdrop-blur-sm z-10 bg-transparent"
-            style={{ textShadow: theme === 'dark' ? '0 1px 2px rgba(0,0,0,0.5)' : '0 1px 2px rgba(255,255,255,0.5)' }}
+            className="text-zinc-800 dark:text-zinc-200 text-xs font-medium tracking-tight absolute top-full pt-1 z-10"
+            style={{ 
+              textShadow: theme === 'dark' 
+                ? '0 1px 3px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9)' 
+                : '0 1px 3px rgba(255,255,255,0.8), 0 0 5px rgba(255,255,255,0.9)',
+              maxWidth: '120px',
+              textAlign: 'center'
+            }}
           >
             {name}
           </motion.div>
