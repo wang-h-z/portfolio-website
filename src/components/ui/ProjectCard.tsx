@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Card from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import Link from 'next/link';
 import type { Project } from '@/types';
 
 interface ProjectCardProps {
@@ -52,22 +52,15 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         <div className="mt-auto">
-          <a 
-            href={project.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full"
+          <Link
+            href={project.link}
+            className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 text-sm font-medium 
+              text-zinc-100 bg-zinc-800/90 hover:bg-zinc-700/90
+              dark:text-zinc-800 dark:bg-zinc-200/90 dark:hover:bg-zinc-300/90
+              transition-colors duration-150 rounded-lg"
           >
-            <Button 
-              variant="outline"
-              className="w-full group flex items-center justify-center gap-2 text-sm sm:text-base"
-            >
-              View Project
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </Button>
-          </a>
+            View Project →
+          </Link>
         </div>
       </div>
     </Card>
