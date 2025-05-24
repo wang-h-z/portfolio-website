@@ -54,12 +54,20 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="mt-auto">
           <Link
             href={project.link}
-            className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 text-sm font-medium 
-              text-zinc-100 bg-zinc-800/90 hover:bg-zinc-700/90
-              dark:text-zinc-800 dark:bg-zinc-200/90 dark:hover:bg-zinc-300/90
-              transition-colors duration-150 rounded-lg"
+            className="group inline-flex items-center justify-center w-full px-5 py-3 mt-4 
+              text-base font-semibold tracking-wide
+              text-zinc-100 bg-zinc-800/90 
+              dark:text-zinc-800 dark:bg-zinc-200/90 
+              rounded-lg transition-all duration-300 ease-out
+              hover:bg-zinc-700/90 dark:hover:bg-zinc-300/90
+              transform hover:scale-[1.02] hover:shadow-lg"
           >
-            View Project →
+            <span className="inline-flex items-center gap-2">
+              View Project
+              <span className="transform transition-transform duration-300 ease-out group-hover:translate-x-1">
+                →
+              </span>
+            </span>
           </Link>
         </div>
       </div>
