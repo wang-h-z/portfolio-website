@@ -54,20 +54,28 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="mt-auto">
           <Link
             href={project.link}
-            className="group inline-flex items-center justify-center w-full px-5 py-3 mt-4 
-              text-base font-semibold tracking-wide
-              text-zinc-100 bg-zinc-800/90 
-              dark:text-zinc-800 dark:bg-zinc-200/90 
-              rounded-lg transition-all duration-300 ease-out
-              hover:bg-zinc-700/90 dark:hover:bg-zinc-300/90
-              transform hover:scale-[1.02] hover:shadow-lg"
+            className="group relative inline-flex w-full overflow-hidden rounded-lg bg-zinc-800 dark:bg-zinc-200"
           >
-            <span className="inline-flex items-center gap-2">
-              View Project
-              <span className="transform transition-transform duration-300 ease-out group-hover:translate-x-1">
-                →
-              </span>
-            </span>
+            {/* Container for the sliding animation */}
+            <div className="relative w-full">
+              {/* Default state - visible text */}
+              <div className="flex items-center justify-center px-6 py-3">
+                <span className="inline-flex items-center gap-2 text-base font-medium text-zinc-100 dark:text-zinc-800 transition-transform duration-300 transform group-hover:-translate-y-full">
+                  View Project
+                  <span aria-hidden="true">→</span>
+                </span>
+              </div>
+
+              {/* Hover state - text that slides up */}
+              <div className="absolute top-full left-0 right-0 h-full">
+                <div className="flex items-center justify-center h-full px-6 py-3">
+                  <span className="inline-flex items-center gap-2 text-base font-medium text-zinc-100 dark:text-zinc-800 transition-transform duration-300 transform group-hover:-translate-y-full">
+                    View Project
+                    <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </div>
+            </div>
           </Link>
         </div>
       </div>
