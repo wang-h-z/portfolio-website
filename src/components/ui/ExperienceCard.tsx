@@ -64,18 +64,32 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
   const hasTech = experience.technologies && experience.technologies.length > 0;
   
   // Dynamic background based on theme
-  const cardBg = theme === 'dark' ? 'bg-zinc-900/95 dark:bg-zinc-900/95' : 'bg-white dark:bg-zinc-900/95';
-  const textColor = theme === 'dark' ? 'text-zinc-300 dark:text-zinc-300' : 'text-zinc-600 dark:text-zinc-300';
-  const headingColor = theme === 'dark' ? 'text-white dark:text-white' : 'text-zinc-900 dark:text-white';
-  
+  const cardBg = theme === 'dark' 
+    ? 'bg-zinc-800/95 dark:bg-zinc-800/95' // Lightened from 900 to 800
+    : 'bg-white dark:bg-zinc-800/95';
+  const textColor = theme === 'dark' 
+    ? 'text-zinc-200 dark:text-zinc-200' // Lightened from 300 to 200
+    : 'text-zinc-600 dark:text-zinc-200';
+  const headingColor = theme === 'dark' 
+    ? 'text-white dark:text-white' 
+    : 'text-zinc-900 dark:text-white';
+
   return (
     <motion.div 
-      className={`relative ${cardBg} rounded-lg shadow-md mb-4 
-                 hover:shadow-lg transition-all duration-300 
-                 ${hasTech ? 'cursor-pointer' : ''}`}
+      className={`
+        relative ${cardBg} rounded-lg
+        shadow-lg dark:shadow-xl
+        hover:shadow-xl dark:hover:shadow-2xl
+        transition-all duration-300 mb-4
+        border border-zinc-200/10 dark:border-zinc-700/50
+        hover:border-zinc-300/20 dark:hover:border-zinc-600
+        ${hasTech ? 'cursor-pointer' : ''}
+      `}
       whileHover={{ 
         scale: 1.02,
-        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
+        boxShadow: theme === 'dark' 
+          ? "0 20px 30px -8px rgba(0, 0, 0, 0.3)" 
+          : "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
       }}
       onClick={() => hasTech && setShowTech(!showTech)}
       transition={{ duration: 0.2 }}
