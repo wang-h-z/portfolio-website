@@ -54,28 +54,22 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="mt-auto">
           <Link
             href={project.link}
-            className="group relative inline-flex w-full overflow-hidden rounded-lg bg-zinc-800 dark:bg-zinc-200"
+            className="group flex items-center justify-center w-full px-6 py-3 
+              bg-zinc-800 hover:bg-zinc-700 dark:bg-zinc-200 dark:hover:bg-zinc-300
+              rounded-lg transition-all duration-300 ease-out
+              hover:scale-[1.02] hover:shadow-lg transform-gpu"
           >
-            {/* Container for the sliding animation */}
-            <div className="relative w-full">
-              {/* Default state - visible text */}
-              <div className="flex items-center justify-center px-6 py-3">
-                <span className="inline-flex items-center gap-2 text-base font-medium text-zinc-100 dark:text-zinc-800 transition-transform duration-300 transform group-hover:-translate-y-full">
-                  View Project
-                  <span aria-hidden="true">→</span>
-                </span>
-              </div>
-
-              {/* Hover state - text that slides up */}
-              <div className="absolute top-full left-0 right-0 h-full">
-                <div className="flex items-center justify-center h-full px-6 py-3">
-                  <span className="inline-flex items-center gap-2 text-base font-medium text-zinc-100 dark:text-zinc-800 transition-transform duration-300 transform group-hover:-translate-y-full">
-                    View Project
-                    <span aria-hidden="true">→</span>
-                  </span>
-                </div>
-              </div>
-            </div>
+            <span className="inline-flex items-center gap-2 text-base font-medium text-zinc-100 dark:text-zinc-800">
+              <span className="group-hover:-translate-y-px transition-transform duration-300">
+                View Project
+              </span>
+              <span 
+                aria-hidden="true"
+                className="transform transition-all duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </span>
           </Link>
         </div>
       </div>
