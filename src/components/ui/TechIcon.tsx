@@ -20,13 +20,13 @@ export default function TechIcon({ name, icon: Icon }: TechIconProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Icon container with improved contrast */}
-      <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center shadow-md dark:shadow-lg">
-        {/* Icon with better contrast */}
-        <Icon size={22} className="text-zinc-700 dark:text-zinc-200" />
+      {/* Icon - adjusted to w-10/h-10 for slightly smaller size */}
+      <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+        {/* Adjusted icon size to 22 */}
+        <Icon size={22} className="text-zinc-700 dark:text-zinc-300" />
       </div>
       
-      {/* Sliding Text */}
+      {/* Sliding Text - kept text size but adjusted positioning */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
