@@ -1,15 +1,45 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Section from '@/components/ui/Section';
 import { contentVariants } from '@/constants/data';
-import { useTheme } from '@/lib/ThemeContext'; // Add this import
+import { useTheme } from '@/lib/ThemeContext';
 
 export default function Hero() {
   const [isHovering, setIsHovering] = useState(false);
-  const { theme } = useTheme(); // Add this to access current theme
+  const [typedText, setTypedText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const { theme } = useTheme();
+
+  const fullText = "Hi there!";
+
+  // Typing animation effect
+  useEffect(() => {
+    let currentIndex = 0;
+    const typeInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setTypedText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typeInterval);
+        // Hide cursor after typing is complete
+        setTimeout(() => setShowCursor(false), 500);
+      }
+    }, 150); // Adjust speed here (lower = faster)
+
+    return () => clearInterval(typeInterval);
+  }, []);
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 600);
+
+    return () => clearInterval(cursorInterval);
+  }, []);
 
   // Image hover animation variant
   const imageHoverVariants = {
@@ -125,7 +155,12 @@ export default function Hero() {
           {/* Right Side */}
           <motion.div variants={textVariants}>
             <h1 className="text-5xl font-bold mb-6 text-zinc-900 dark:text-white flex items-center gap-4">
-              Hi there!
+              <span className="flex items-center">
+                {typedText}
+                {showCursor && typedText.length < fullText.length && (
+                  <span className="animate-pulse text-zinc-400">|</span>
+                )}
+              </span>
               <motion.span 
                 className="inline-block"
                 variants={waveVariants}
