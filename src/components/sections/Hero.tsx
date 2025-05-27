@@ -27,7 +27,7 @@ export default function Hero() {
         // Hide cursor after typing is complete
         setTimeout(() => setShowCursor(false), 500);
       }
-    }, 150); // Adjust speed here (lower = faster)
+    }, 100); // Adjust speed here (lower = faster)
 
     return () => clearInterval(typeInterval);
   }, []);
@@ -73,14 +73,13 @@ export default function Hero() {
     }
   };
 
-  // Wave animation for emoji
+  // Wave animation for emoji - always active when emoji is visible
   const waveVariants = {
-    initial: { rotate: 0 },
     wave: {
       rotate: [0, 14, -8, 14, -4, 0],
       transition: {
         duration: 1.5,
-        repeat: isHovering ? Infinity : 0,
+        repeat: Infinity,
         repeatType: "loop" as const,
         ease: "easeInOut"
       }
@@ -155,20 +154,38 @@ export default function Hero() {
           {/* Right Side */}
           <motion.div variants={textVariants}>
             <h1 className="text-5xl font-bold mb-6 text-zinc-900 dark:text-white flex items-center gap-4">
-              <span className="flex items-center">
-                {typedText}
-                {showCursor && typedText.length < fullText.length && (
-                  <span className="animate-pulse text-zinc-400">|</span>
+              <span className="flex items-center gap-4">
+                <span>
+                  {typedText}
+                  {showCursor && typedText.length < fullText.length && (
+                    <span className="animate-pulse text-zinc-400">|</span>
+                  )}
+                </span>
+                {typedText === fullText && (
+                  <motion.span 
+                    className="inline-block"
+                    variants={waveVariants}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ 
+                      opacity: 1, 
+                      scale: 1,
+                      rotate: [0, 14, -8, 14, -4, 0]
+                    }}
+                    transition={{ 
+                      opacity: { duration: 0.2 },
+                      scale: { duration: 0.2 },
+                      rotate: {
+                        duration: 1.2,
+                        repeat: Infinity,
+                        repeatType: "loop" as const,
+                        ease: "easeInOut"
+                      }
+                    }}
+                  >
+                    👋
+                  </motion.span>
                 )}
               </span>
-              <motion.span 
-                className="inline-block"
-                variants={waveVariants}
-                initial="initial"
-                animate={isHovering ? "wave" : "initial"}
-              >
-                👋
-              </motion.span>
             </h1>
             <motion.p 
               className="text-xl text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed"
