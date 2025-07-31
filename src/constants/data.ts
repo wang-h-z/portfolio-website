@@ -102,15 +102,6 @@ export const experiences: Experience[] = [
     technologies: [technologies['Java']],
   },
   {
-    year: 'Jan 2025 - May 2025',
-    title: 'CS2103T Student Mentor (Probationary)',
-    company: 'NUS School of Computing',
-    description: 'Assist students by resolving technical issues and providing supplemental explanations for Software Engineering concepts.',
-    icon: 'school',
-    image: '/assets/experiences/nus.png',
-    technologies: [technologies['Java'], technologies['Gradle'], technologies['CodeCov']],
-  },
-  {
     year: 'August 2024 - May 2025',
     title: 'Full Stack Developer',
     company: 'NUS RC4',
