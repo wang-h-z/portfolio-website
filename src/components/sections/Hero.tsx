@@ -151,7 +151,6 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          {/* Right Side */}
           <motion.div variants={textVariants}>
             <h1 className="text-5xl font-bold mb-6 text-zinc-900 dark:text-white flex items-center gap-4">
               <span className="flex items-center gap-4">
@@ -164,7 +163,6 @@ export default function Hero() {
                 {typedText === fullText && (
                   <motion.span 
                     className="inline-block"
-                    variants={waveVariants}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ 
                       opacity: 1, 
