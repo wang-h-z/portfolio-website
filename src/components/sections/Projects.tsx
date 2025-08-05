@@ -181,7 +181,7 @@ export default function Projects() {
                           <CardItem
                             translateZ={20}
                             as="a"
-                            href={project.github || project.link}
+                            href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-normal text-neutral-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
