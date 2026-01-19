@@ -65,23 +65,23 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
   
   // Dynamic background based on theme
   const cardBg = theme === 'dark' 
-    ? 'bg-zinc-800/95 dark:bg-zinc-800/95' // Lightened from 900 to 800
-    : 'bg-white dark:bg-zinc-800/95';
+    ? 'bg-zinc-800/80' // Lightened from 900 to 800
+    : 'bg-white';
   const textColor = theme === 'dark' 
-    ? 'text-zinc-200 dark:text-zinc-200' // Lightened from 300 to 200
-    : 'text-zinc-600 dark:text-zinc-200';
+    ? 'text-zinc-200' // Lightened from 300 to 200
+    : 'text-zinc-600';
   const headingColor = theme === 'dark' 
-    ? 'text-white dark:text-white' 
-    : 'text-zinc-900 dark:text-white';
+    ? 'text-white' 
+    : 'text-zinc-900';
 
   return (
     <motion.div 
       className={`
-        relative ${cardBg} rounded-lg
-        shadow-lg dark:shadow-xl
-        hover:shadow-xl dark:hover:shadow-2xl
+        relative ${cardBg} rounded-xl
+        shadow-lg dark:shadow-zinc-900/50
+        hover:shadow-xl dark:hover:shadow-zinc-800/50
         transition-all duration-300 mb-4
-        border border-zinc-200/10 dark:border-zinc-700/50
+        border border-zinc-200 dark:border-zinc-600/50
         hover:border-zinc-300/20 dark:hover:border-zinc-600
         ${hasTech ? 'cursor-pointer' : ''}
       `}
@@ -97,7 +97,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
       {/* Colored gradient bar on top */}
       <div className={`h-1 w-full ${isLeft ? 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500' : 'bg-gradient-to-r from-green-500 via-teal-500 to-blue-500'}`}></div>
       
-      <div className="p-5">
+      <div className="p-6">
         {/* Header with image and title - with consistent alignment */}
         <div className={`flex items-center mb-4 ${isLeft ? 'flex-row-reverse text-right' : 'flex-row text-left'}`}>
           {experience.image && (
@@ -113,16 +113,16 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
           )}
           
           <div className="flex-1">
-            <h3 className={`text-lg font-bold ${headingColor}`}>
+            <h3 className={`text-xl font-bold ${headingColor}`}>
               {experience.title}
             </h3>
             <div className={`flex items-center gap-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
-              <p className={textColor + " text-sm"}>
+              <p className={`${textColor} text-sm`}>
                 {experience.company}
               </p>
               
               {/* Duration badge */}
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+              <span className="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>

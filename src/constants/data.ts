@@ -84,7 +84,7 @@ export const stripColors = [
 
 export const experiences: Experience[] = [
   {
-    year: 'May 2025 - Present',
+    year: 'May 2025 - Dec 2025',
     title: 'Full Stack Developer Intern',
     company: 'Synapxe', 
     description: 'Integrate Computer Vision and GenAI into Full Stack Systems.',
@@ -101,15 +101,6 @@ export const experiences: Experience[] = [
     image: '/assets/experiences/nus.png',
     technologies: [technologies['Java']],
   },
-  {
-    year: 'August 2024 - May 2025',
-    title: 'Full Stack Developer',
-    company: 'NUS RC4',
-    description: 'Developed a booking website for residents to book facilities and amentities.',
-    icon: 'school',
-    image: '/assets/experiences/rc4.png',
-    technologies: [technologies['NextJS'], technologies['TailWind']],
-  }
 ];
   
   export const projects: Project[] = [
