@@ -22,7 +22,7 @@ export default function ExperienceCard({ experience, isLeft }: ExperienceCardPro
     if (experience.year.includes('Present')) {
       const startYear = parseInt(experience.year.split(' - ')[0].split(' ')[0]);
       const currentYear = new Date().getFullYear();
-      const months = new Date().getMonth() - 4; // Assuming May is when you started
+      const months = new Date().getMonth();
       
       if (currentYear > startYear) {
         return `${currentYear - startYear}y ${months >= 0 ? months : 12 + months}m`;

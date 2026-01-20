@@ -84,6 +84,15 @@ export const stripColors = [
 
 export const experiences: Experience[] = [
   {
+    year: 'Jan 2026 - Present',
+    title: 'Software Engineer Intern',
+    company: 'Monetary Authority of Singapore', 
+    description: 'Supervision Platforms',
+    icon: 'work',
+    image: '/assets/experiences/mas.jpeg',
+    technologies: [],
+  },
+  {
     year: 'May 2025 - Dec 2025',
     title: 'Full Stack Developer Intern',
     company: 'Synapxe', 
