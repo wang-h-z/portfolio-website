@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTheme } from '@/lib/ThemeContext';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 import { Menu, X } from 'lucide-react';
 
@@ -17,14 +16,18 @@ const navItems = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -33,10 +36,21 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
+  // Don't render interactive elements until mounted
+  if (!mounted) {
+    return (
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <span className="text-xl font-bold text-zinc-900 dark:text-white">wang-h-z</span>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/80 dark:bg-zinc-900/80 backdrop-blur-lg shadow-lg'
@@ -122,6 +136,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }
