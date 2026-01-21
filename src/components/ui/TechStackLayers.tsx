@@ -48,40 +48,40 @@ export default function TechStackLayers() {
   };
 
   return (
-    <div className="relative w-full py-12">
+    <div className="relative w-full h-full flex flex-col items-center justify-center py-8 max-h-screen overflow-hidden">
       {/* Section Header */}
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-          Skills & Technologies
+      <div className="text-center mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-2">
+          stuff i've used
         </h2>
-        <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-          Hover over the layers to highlight, click a layer to expand
+        <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+          hover over the layers to highlight, click a layer to see more
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12 flex-shrink-0">
         {/* Left Side - Diamond Stack */}
-        <div className="relative" style={{ width: '300px', height: '450px' }}>
+        <div className="relative" style={{ width: '250px', height: '350px' }}>
           {techLayers.map((layer, index) => {
             const isHovered = hoveredIndex === index;
             const isSelected = selectedIndex === index;
-            const yOffset = index * 90;
-            
+            const yOffset = index * 70;
+
             return (
               <motion.div
                 key={layer.name}
                 className="absolute cursor-pointer"
                 style={{
-                  width: '200px',
-                  height: '200px',
-                  left: '50px',
+                  width: '160px',
+                  height: '160px',
+                  left: '45px',
                   top: yOffset,
                   zIndex: isHovered || isSelected ? 100 : techLayers.length - index,
                   transformStyle: 'preserve-3d',
                 }}
                 animate={{
-                  y: isHovered ? -15 : 0,
-                  scale: isSelected ? 1.1 : isHovered ? 1.05 : 1,
+                  y: isHovered ? -12 : 0,
+                  scale: isSelected ? 1.08 : isHovered ? 1.04 : 1,
                 }}
                 transition={{
                   type: 'spring',
@@ -144,15 +144,15 @@ export default function TechStackLayers() {
         </div>
 
         {/* Right Side - Labels */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           {techLayers.map((layer, index) => {
             const isHovered = hoveredIndex === index;
             const isSelected = selectedIndex === index;
-            
+
             return (
               <motion.div
                 key={layer.name}
-                className="flex items-center gap-4 cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 onClick={() => handleCardClick(index)}
@@ -163,19 +163,19 @@ export default function TechStackLayers() {
               >
                 {/* Number badge */}
                 <div
-                  className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                  className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
                   style={{ backgroundColor: layer.solidColor }}
                 >
                   {index + 1}
                 </div>
-                
+
                 {/* Dotted line */}
-                <div className="w-12 border-t-2 border-dotted border-zinc-300 dark:border-zinc-600" />
-                
+                <div className="w-8 border-t-2 border-dotted border-zinc-300 dark:border-zinc-600" />
+
                 {/* Label pill */}
                 <motion.div
-                  className="px-6 py-3 rounded-full font-semibold text-white"
-                  style={{ 
+                  className="px-4 py-2 text-sm md:text-base rounded-full font-semibold text-white whitespace-nowrap"
+                  style={{
                     backgroundColor: layer.solidColor,
                     boxShadow: isHovered || isSelected ? `0 4px 20px ${layer.solidColor}60` : 'none',
                   }}
@@ -195,17 +195,17 @@ export default function TechStackLayers() {
       {/* Expanded details panel */}
       {selectedIndex !== null && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          className="mt-12 max-w-2xl mx-auto p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800"
+          exit={{ opacity: 0, y: 10 }}
+          className="mt-6 max-w-xl mx-auto p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800"
         >
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-2 mb-3">
             <div
-              className="w-4 h-4 rounded-full"
+              className="w-3 h-3 rounded-full"
               style={{ backgroundColor: techLayers[selectedIndex].solidColor }}
             />
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
+            <h3 className="text-base md:text-lg font-bold text-zinc-900 dark:text-white">
               {techLayers[selectedIndex].name}
             </h3>
           </div>
@@ -216,7 +216,7 @@ export default function TechStackLayers() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.05 }}
-                className="px-4 py-2 text-sm rounded-full text-white font-medium"
+                className="px-3 py-1.5 text-xs md:text-sm rounded-full text-white font-medium"
                 style={{ backgroundColor: techLayers[selectedIndex].solidColor }}
               >
                 {item}
@@ -224,11 +224,11 @@ export default function TechStackLayers() {
             ))}
           </div>
           <p
-            className="text-sm mt-4 cursor-pointer hover:underline"
+            className="text-xs md:text-sm mt-3 cursor-pointer hover:underline"
             style={{ color: techLayers[selectedIndex].solidColor }}
             onClick={() => setSelectedIndex(null)}
           >
-            Click to close
+            click to close
           </p>
         </motion.div>
       )}

@@ -34,7 +34,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           className="inline-flex items-center gap-2 text-violet-600 dark:text-violet-400 hover:underline mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Blog
+          back to blog
         </Link>
 
         {/* Title */}

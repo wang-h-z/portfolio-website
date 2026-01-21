@@ -48,7 +48,7 @@ export default function Experience() {
           whileInView="visible"
           viewport={{ once: false }}
         >
-          My Journey
+          my experience
         </motion.h2>
         
         {/* Larger padding on mobile for better timeline layout */}

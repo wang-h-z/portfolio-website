@@ -2,13 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Section from '@/components/ui/Section';
+import TechStackLayers from '@/components/ui/TechStackLayers';
 import { contentVariants } from '@/constants/data';
 import { useTheme } from '@/lib/ThemeContext';
 
 export default function Hero() {
-  const [isHovering, setIsHovering] = useState(false);
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const { theme } = useTheme();
@@ -41,118 +39,33 @@ export default function Hero() {
     return () => clearInterval(cursorInterval);
   }, []);
 
-  // Image hover animation variant
-  const imageHoverVariants = {
-    hover: {
-      scale: 1.03,
-      transition: { duration: 0.3 }
-    }
-  };
-
-  // Background animation variant
-  const backgroundVariants = {
-    hidden: { 
-      scale: 1,
-      opacity: 0 
-    },
-    visible: { 
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.2 }
-    },
-    animate: {
-      scale: [1, 1.02, 1],
-      opacity: 1,
-      transition: {
-        scale: {
-          duration: 3,
-          repeat: Infinity,
-          repeatType: "loop" as const
-        }
-      }
-    }
-  };
-
-  // Wave animation for emoji - always active when emoji is visible
-  const waveVariants = {
-    wave: {
-      rotate: [0, 14, -8, 14, -4, 0],
-      transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        repeatType: "loop" as const,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   // Text reveal animation
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.6, staggerChildren: 0.2 }
     }
   };
 
   return (
-    <Section id="hero" bgColor={theme === 'dark' ? 'dark' : 'white'}>
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 min-h-[80vh]">
-        <motion.div 
-          className="md:w-1/2 text-left"
-          variants={contentVariants}
-        >
-          {/* Left Side */}
-          <div className="w-fit relative">
-            <motion.div 
-              className="relative w-96 h-96 mb-4"
-              whileHover="hover"
-              variants={imageHoverVariants}
-              onHoverStart={() => setIsHovering(true)}
-              onHoverEnd={() => setIsHovering(false)}
-            >
-              <Image 
-                src="/assets/hero/pfp.jpg"
-                alt="Profile"
-                fill 
-                className="rounded-3xl object-cover shadow-lg transition-shadow duration-300 hover:shadow-xl"
-                priority 
-                sizes="(max-width: 768px) 100vw, 384px" 
-              />
-              {/* Decorative elements */}
-              <motion.div 
-                className="absolute -z-10 w-full h-full bg-zinc-200 dark:bg-zinc-700 rounded-3xl -right-3 -bottom-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isHovering ? 1 : 0 }}
-                transition={{ duration: 0.2 }}
-              />
-              <motion.div 
-                className="absolute -z-20 w-full h-full border-2 border-zinc-300 dark:border-zinc-600 rounded-3xl right-6 bottom-6"
-                variants={backgroundVariants}
-                initial="hidden"
-                animate={isHovering ? "animate" : "hidden"}
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-md absolute bottom-8 left-4"
-            >
-              <p className="text-zinc-600 dark:text-zinc-300 text-lg">Y2 CS @ NUS</p>
-            </motion.div>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          className="md:w-1/2 flex flex-col justify-center"
+    <>
+      {/* Subsection 1: Intro + About */}
+      <section
+        id="hero"
+        className={`relative min-h-screen flex items-center justify-center ${
+          theme === 'dark' ? 'bg-zinc-950' : 'bg-white'
+        }`}
+      >
+        <motion.div
+          className="w-full flex flex-col items-center justify-center text-center px-4 z-10"
           variants={contentVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.div variants={textVariants}>
-            <h1 className="text-5xl font-bold mb-6 text-zinc-900 dark:text-white flex items-center gap-4">
+            <h1 className="text-5xl font-bold mb-6 text-zinc-900 dark:text-white flex items-center justify-center gap-4">
               <span className="flex items-center gap-4">
                 <span>
                   {typedText}
@@ -161,15 +74,15 @@ export default function Hero() {
                   )}
                 </span>
                 {typedText === fullText && (
-                  <motion.span 
+                  <motion.span
                     className="inline-block"
                     initial={{ opacity: 0, scale: 0 }}
-                    animate={{ 
-                      opacity: 1, 
+                    animate={{
+                      opacity: 1,
                       scale: 1,
                       rotate: [0, 14, -8, 14, -4, 0]
                     }}
-                    transition={{ 
+                    transition={{
                       opacity: { duration: 0.2 },
                       scale: { duration: 0.2 },
                       rotate: {
@@ -185,34 +98,39 @@ export default function Hero() {
                 )}
               </span>
             </h1>
-            <motion.p 
-              className="text-xl text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed"
+            <motion.p
+              className="text-xl text-zinc-600 dark:text-zinc-300 mb-8"
+              style={{ lineHeight: '1.5' }}
               variants={textVariants}
             >
               i'm haozhen, a cs undergrad from national university of singapore.
-              <br></br>
+              <br />
               i enjoy making useful, impactful applications and learning new and challenging technologies.
-              <br></br>
-              i'm currently working on some projects and probably interning. do feel free to find out more about me here
-              <br></br>
-              <br></br>
-              thanks for visiting!
+              <br />
+              please take a look around my website!
+              <br />
+              thanks for visiting! :D
             </motion.p>
-            <motion.div 
-              className="flex gap-4"
-              variants={textVariants}
-            >
-              <a 
-                href="#projects" 
-                className="group relative px-6 py-3 bg-zinc-900 dark:bg-zinc-700 text-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg"
-              >
-                <span className="relative z-10">View Projects</span>
-                <div className="absolute inset-0 w-0 bg-zinc-700 dark:bg-zinc-600 transition-all duration-300 ease-out group-hover:w-full" />
-              </a>
-            </motion.div>
           </motion.div>
         </motion.div>
-      </div>
-    </Section>
+      </section>
+
+      {/* Subsection 2: Tech Stack */}
+      <section
+        className={`relative min-h-screen flex items-center justify-center overflow-hidden ${
+          theme === 'dark' ? 'bg-zinc-950' : 'bg-white'
+        }`}
+      >
+        <motion.div
+          className="w-full max-w-6xl mx-auto px-4 z-10"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <TechStackLayers />
+        </motion.div>
+      </section>
+    </>
   );
 }
