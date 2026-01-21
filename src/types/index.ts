@@ -20,7 +20,7 @@ export interface Experience {
 
 export interface Technology {
   name: string;
-  icon: React.ComponentType;
+  icon: IconType;
 }
 
 export interface BlogPost {
