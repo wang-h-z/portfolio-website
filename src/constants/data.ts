@@ -27,60 +27,60 @@ export const stripColors = [
     'from-red-500 to-rose-500',
   ] as const;
 
-  export const technologies: { [key: string]: Technology } = {
+  export const technologies = {
     'Java': {
       name: 'Java',
       icon: DiJava
-    },
+    } as Technology,
     'Gradle': {
       name: 'Gradle',
       icon: SiGradle
-    },
+    } as Technology,
     'CodeCov': {
       name: 'CodeCov',
       icon: SiCodecov
-    },
+    } as Technology,
     'NextJS': {
       name: 'NextJS',
       icon: SiNextdotjs
-    },
+    } as Technology,
     'React': {
       name: 'React',
       icon: SiReact
-    },
+    } as Technology,
     'Node.js': {
       name: 'Node.js',
       icon: SiNodedotjs
-    },
+    } as Technology,
     'TypeScript': {
       name: 'TypeScript',
       icon: SiTypescript
-    },
+    } as Technology,
     'MongoDB': {
       name: 'MongoDB',
       icon: SiMongodb
-    },
+    } as Technology,
     'TailWind': {
       name: 'TailwindCSS',
       icon: SiTailwindcss
-    },
+    } as Technology,
     'Python': {
       name: 'Python',
       icon: SiPython
-    },
+    } as Technology,
     'Flask': {
       name: 'Flask',
       icon: SiFlask
-    },
+    } as Technology,
     'Telegram': {
       name: 'Telegram',
       icon: SiTelegram
-    },
+    } as Technology,
     'OpenAI': {
       name: 'OpenAI',
       icon: SiOpenai
-    }
-  };
+    } as Technology
+  } satisfies Record<string, Technology>;
 
 export const experiences: Experience[] = [
   {
