@@ -13,7 +13,7 @@ export default function Hero() {
   const [showCursor, setShowCursor] = useState(true);
   const { theme } = useTheme();
 
-  const fullText = "Hi there!";
+  const fullText = "hi there!";
 
   // Typing animation effect
   useEffect(() => {
@@ -189,8 +189,14 @@ export default function Hero() {
               className="text-xl text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed"
               variants={textVariants}
             >
-              I'm Haozhen, a CS undergrad from National University of Singapore.
-              I enjoy making useful applications and learning new technologies!
+              i'm haozhen, a cs undergrad from national university of singapore.
+              <br></br>
+              i enjoy making useful, impactful applications and learning new and challenging technologies.
+              <br></br>
+              i'm currently working on some projects and probably interning. do feel free to find out more about me here
+              <br></br>
+              <br></br>
+              thanks for visiting!
             </motion.p>
             <motion.div 
               className="flex gap-4"

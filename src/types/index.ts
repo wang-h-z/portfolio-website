@@ -6,7 +6,7 @@ export interface Experience {
     company: string;
     description: string;
     icon: string;
-    image?: string; 
+    image: string;
     technologies: Technology[];
   }
   
@@ -15,11 +15,21 @@ export interface Experience {
     description: string;
     technologies: string[];
     link: string;
-    image?: string; 
+    image: string; 
   }
-
 
 export interface Technology {
   name: string;
-  icon: IconType; 
+  icon: React.ComponentType;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  summary: string;
+  author: string;
+  readTime: string;
+  tags: string[];
+  project: string;
 }

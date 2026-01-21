@@ -8,9 +8,10 @@ import ThemeToggle from '@/components/ui/ThemeToggle';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Experience', href: '/experience' },
-  { name: 'Projects', href: '/projects' },
+  { label: 'Home', href: '/' },
+  { label: 'Experience', href: '/experience' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
 ];
 
 export default function Navbar() {
@@ -73,7 +74,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.label}
                 href={item.href}
                 className={`relative px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
                   pathname === item.href
@@ -81,7 +82,7 @@ export default function Navbar() {
                     : 'text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800'
                 }`}
               >
-                {item.name}
+                {item.label}
                 {pathname === item.href && (
                   <motion.div
                     layoutId="navbar-indicator"
@@ -121,7 +122,7 @@ export default function Navbar() {
             <div className="px-4 py-2 space-y-1">
               {navItems.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.label}
                   href={item.href}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                     pathname === item.href
@@ -129,7 +130,7 @@ export default function Navbar() {
                       : 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                   }`}
                 >
-                  {item.name}
+                  {item.label}
                 </Link>
               ))}
             </div>
