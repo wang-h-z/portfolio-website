@@ -1,5 +1,5 @@
 ---
-title: "Codeforces Megathread"
+title: "codeforces megathread"
 project: "codeforces"
 summary: "cp looks fun (competitve programming)"
 author: "me"
