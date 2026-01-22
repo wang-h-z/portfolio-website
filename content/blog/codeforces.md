@@ -1,7 +1,7 @@
 ---
 title: "codeforces megathread"
 project: "codeforces"
-summary: "cp looks fun (competitve programming)"
+summary: "cp looks fun (competitive programming)"
 author: "me"
 readTime: "1 min read"
 tags: []
@@ -9,10 +9,10 @@ tags: []
 
 # codeforces megathread
 
-wanted to start learning c++, in general i also really just enjoy leetcoding and was super inspired and interested by competitve programming concepts and the math/algos involved so naturally i wanted to start trying out some cp
+wanted to start learning c++, in general i also really just enjoy leetcoding and was super inspired and interested by competitive programming concepts and the math/algos involved so naturally i wanted to start trying out some cp
 
 resources that i'll be mainly interacting with: 
-1. [competitve programming handbook](https://cses.fi/book/book.pdf)
+1. [competitive programming handbook](https://cses.fi/book/book.pdf)
 2. [cp31 sheet](https://www.tle-eliminators.com/cp-sheet)
 
 ## content page
@@ -20,5 +20,3 @@ resources that i'll be mainly interacting with:
 - [part 1: Learning the Right Programming Language](#part-1-learning-the-right-programming-language)
 
 ## part 1: learning the right programming language
-
-obviously going

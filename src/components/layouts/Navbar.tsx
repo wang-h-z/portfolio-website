@@ -8,10 +8,10 @@ import ThemeToggle from '@/components/ui/ThemeToggle';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Experience', href: '/experience' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'home', href: '/' },
+  { label: 'experience', href: 'https://drive.google.com/file/d/1G9_mhpF6qGkDedL8XIQPxllfeYpfYdfo/view?usp=drive_link', external: true },
+  { label: 'projects', href: '/projects' },
+  { label: 'blog', href: '/blog' },
 ];
 
 export default function Navbar() {
@@ -76,6 +76,8 @@ export default function Navbar() {
               <Link
                 key={item.label}
                 href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
                 className={`relative px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
                   pathname === item.href
                     ? 'text-blue-600 dark:text-blue-400'
@@ -124,6 +126,8 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener noreferrer' : undefined}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                     pathname === item.href
                       ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
