@@ -15,9 +15,8 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          {/* Copyright */}
-          {/* Social Links */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-end justify-end gap-4">
+          {/* Social Links - Bottom Right */}
           <div className="flex items-center gap-1">
             {socials.map((social) => (
               <motion.a
