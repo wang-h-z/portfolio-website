@@ -9,7 +9,7 @@ tags: []
 
 # codeforces megathread
 
-wanted to start learning c++, in general i also really just enjy leetcoding and was super inspired and interested by competitve programming concepts and the math/algos involved so naturally i wanted to start trying out some cp
+wanted to start learning c++, in general i also really just enjoy leetcoding and was super inspired and interested by competitve programming concepts and the math/algos involved so naturally i wanted to start trying out some cp
 
 resources that i'll be mainly interacting with: 
 1. [competitve programming handbook](https://cses.fi/book/book.pdf)
