@@ -105,7 +105,7 @@ export default function Hero() {
             >
               i'm haozhen, a cs undergrad from national university of singapore.
               <br />
-              i enjoy making useful, impactful applications and learning new and challenging technologies.
+              i enjoy making useful, impactful applications and learning new, challenging technologies.
               <br />
               please take a look around my website!
               <br />
