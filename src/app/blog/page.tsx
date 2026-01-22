@@ -17,7 +17,7 @@ export default function BlogPage() {
             my blog
           </h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-400">
-            not a writer, just sharing some thoughts
+            evidently i am not a writer
           </p>
         </div>
 

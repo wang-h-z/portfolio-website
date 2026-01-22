@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Copyright */}
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            © {new Date().getFullYear()} Haozhen. All rights reserved.
+            © {new Date().getFullYear()} haozhen. all rights reserved.
           </p>
 
           {/* Social Links */}
