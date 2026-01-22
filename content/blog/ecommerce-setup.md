@@ -1,6 +1,5 @@
 ---
 title: "Setting Up E-commerce Platform"
-date: "2024-02-01"
 project: "E-commerce Platform"
 summary: "Building a scalable e-commerce platform with Next.js and Stripe integration. Exploring payment processing and inventory management."
 author: "Haozhen Wang"
