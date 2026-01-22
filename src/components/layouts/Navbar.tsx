@@ -9,8 +9,8 @@ import { Menu, X } from 'lucide-react';
 
 const navItems = [
   { label: 'home', href: '/' },
-  { label: 'experience', href: 'https://drive.google.com/file/d/1G9_mhpF6qGkDedL8XIQPxllfeYpfYdfo/view?usp=drive_link', external: true },
   { label: 'projects', href: '/projects' },
+  { label: 'resume', href: 'https://drive.google.com/file/d/1G9_mhpF6qGkDedL8XIQPxllfeYpfYdfo/view?usp=drive_link', external: true },
   { label: 'blog', href: '/blog' },
 ];
 

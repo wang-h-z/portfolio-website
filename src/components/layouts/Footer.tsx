@@ -17,10 +17,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Copyright */}
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            © {new Date().getFullYear()} haozhen. all rights reserved.
-          </p>
-
           {/* Social Links */}
           <div className="flex items-center gap-1">
             {socials.map((social) => (
