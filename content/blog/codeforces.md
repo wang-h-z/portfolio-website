@@ -3,6 +3,7 @@ title: "codeforces megathread"
 project: "codeforces"
 summary: "competitive programming looks fun"
 author: "me"
+date: "22 Jan 2026"
 readTime: "1 min read"
 tags: []
 ---

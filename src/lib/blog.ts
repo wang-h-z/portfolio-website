@@ -5,10 +5,6 @@ import { BlogPost } from '@/types';
 
 const postsDirectory = path.join(process.cwd(), 'content/blog');
 
-function formatDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
-}
-
 export function getAllPosts(): BlogPost[] {
   // Create directory if it doesn't exist
   if (!fs.existsSync(postsDirectory)) {
@@ -24,12 +20,11 @@ export function getAllPosts(): BlogPost[] {
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data } = matter(fileContents);
-      const fileDate = formatDate(fs.statSync(fullPath).mtime);
 
       return {
         slug,
         title: data.title || 'Untitled',
-        date: data.date || fileDate,
+        date: data.date,
         summary: data.summary || '',
         author: data.author || 'Haozhen Wang',
         readTime: data.readTime || '5 min read',
@@ -51,12 +46,11 @@ export function getPostBySlug(slug: string) {
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
-  const fileDate = formatDate(fs.statSync(fullPath).mtime);
 
   return {
     slug,
     title: data.title || 'Untitled',
-    date: data.date || fileDate,
+    date: data.date,
     summary: data.summary || '',
     author: data.author || 'Haozhen Wang',
     readTime: data.readTime || '5 min read',
