@@ -1,7 +1,7 @@
 ---
 title: "codeforces megathread"
 project: "codeforces"
-summary: "cp looks fun (competitive programming)"
+summary: "competitive programming looks fun"
 author: "me"
 readTime: "1 min read"
 tags: []
