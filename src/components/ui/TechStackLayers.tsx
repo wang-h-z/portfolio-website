@@ -1,39 +1,151 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+
+interface TechItem {
+  name: string;
+  icon: string;
+}
 
 interface TechLayer {
   name: string;
-  items: string[];
+  items: TechItem[];
   color: string;
   darkColor: string;
   solidColor: string;
 }
 
+// Map technology names to their icon file names
+const techIconMap: Record<string, string> = {
+  'TypeScript': 'TypeScript.svg',
+  'Python': 'Python.svg',
+  'Java': 'Java.svg',
+  'JavaScript': 'JavaScript.svg',
+  'SQL': 'MySQL.svg',
+  'Go': 'Go.svg',
+  'HTML': 'HTML5.svg',
+  'CSS': 'CSS3.svg',
+  'React': 'React.svg',
+  'Vue': 'Vue.js.svg',
+  'Angular': 'Angular.svg',
+  'Next.js': 'Next.js.svg',
+  'Node.js': 'Node.js.svg',
+  'Express': 'Express.svg',
+  'TailwindCSS': 'Tailwind-CSS.svg',
+  'Flask': 'Flask.svg',
+  'MongoDB': 'MongoDB.svg',
+  'PostgreSQL': 'PostgresSQL.svg',
+  'Docker': 'Docker.svg',
+  'Git': 'Git.svg',
+};
+
 const techLayers: TechLayer[] = [
   {
-    name: 'Programming Languages',
-    items: ['TypeScript', 'Python', 'Java', 'JavaScript', 'SQL'],
+    name: 'programming languages',
+    items: [
+      { name: 'TypeScript', icon: techIconMap['TypeScript'] },
+      { name: 'Python', icon: techIconMap['Python'] },
+      { name: 'Java', icon: techIconMap['Java'] },
+      { name: 'JavaScript', icon: techIconMap['JavaScript'] },
+      { name: 'SQL', icon: techIconMap['SQL'] },
+      { name: 'Go', icon: techIconMap['Go'] },
+    ],
     color: 'rgba(139, 92, 246, 0.5)', // violet-500 - top
     darkColor: 'rgba(109, 40, 217, 0.6)', // darker for sides
     solidColor: '#8b5cf6',
   },
   {
-    name: 'Stacks & Frameworks',
-    items: ['React', 'Next.js', 'Node.js', 'Express', 'TailwindCSS'],
+    name: 'stacks & frameworks',
+    items: [
+      { name: 'HTML', icon: techIconMap['HTML'] },
+      { name: 'CSS', icon: techIconMap['CSS'] },
+      { name: 'React', icon: techIconMap['React'] },
+      { name: 'Vue', icon: techIconMap['Vue'] },
+      { name: 'Angular', icon: techIconMap['Angular'] },
+      { name: 'Next.js', icon: techIconMap['Next.js'] },
+      { name: 'Node.js', icon: techIconMap['Node.js'] },
+      { name: 'Express', icon: techIconMap['Express'] },
+      { name: 'TailwindCSS', icon: techIconMap['TailwindCSS'] },
+      { name: 'Flask', icon: techIconMap['Flask'] },
+      { name: 'MongoDB', icon: techIconMap['MongoDB'] },
+      { name: 'PostgreSQL', icon: techIconMap['PostgreSQL'] },
+    ],
     color: 'rgba(124, 58, 237, 0.65)', // violet-600 - medium
     darkColor: 'rgba(91, 33, 182, 0.75)', // darker for sides
     solidColor: '#7c3aed',
   },
   {
-    name: 'Other Proficiencies',
-    items: ['Docker', 'AWS', 'Git', 'PostgreSQL', 'MongoDB'],
+    name: 'other proficiencies',
+    items: [
+      { name: 'Docker', icon: techIconMap['Docker'] },
+      { name: 'Git', icon: techIconMap['Git'] },
+    ],
     color: 'rgba(109, 40, 217, 0.8)', // violet-700 - darkest
     darkColor: 'rgba(76, 29, 149, 0.9)', // darker for sides
     solidColor: '#6d28d9',
   },
 ];
+
+// Tech Icon Card Component with Flip Animation
+function TechIconCard({ item, delay }: { item: TechItem; delay: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay }}
+      className="relative w-12 h-12 sm:w-16 sm:h-16"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div
+        className="relative w-full h-full"
+        style={{ transformStyle: 'preserve-3d' }}
+        animate={{ rotateY: isHovered ? 180 : 0 }}
+        transition={{ duration: 0.6, type: 'spring', stiffness: 200, damping: 20 }}
+      >
+        {/* Front - Colored Icon */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ backfaceVisibility: 'hidden' }}
+        >
+          <div className="relative w-full h-full">
+            <Image
+              src={`/assets/tech-icons/${item.icon}`}
+              alt={item.name}
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
+
+        {/* Back - Grayscale Icon with Text */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center gap-1"
+          style={{
+            backfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)',
+          }}
+        >
+          <div className="relative w-full h-3/4" style={{ filter: 'grayscale(100%)' }}>
+            <Image
+              src={`/assets/tech-icons/${item.icon}`}
+              alt={item.name}
+              fill
+              className="object-contain"
+            />
+          </div>
+          <p className="text-[8px] sm:text-xs font-bold text-zinc-700 dark:text-zinc-300 text-center whitespace-nowrap">
+            {item.name}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function TechStackLayers() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -193,45 +305,37 @@ export default function TechStackLayers() {
       </div>
 
       {/* Expanded details panel */}
-      {selectedIndex !== null && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          className="mt-6 max-w-xl mx-auto p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800"
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: techLayers[selectedIndex].solidColor }}
-            />
-            <h3 className="text-base md:text-lg font-bold text-zinc-900 dark:text-white">
-              {techLayers[selectedIndex].name}
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {techLayers[selectedIndex].items.map((item, i) => (
-              <motion.span
-                key={item}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.05 }}
-                className="px-3 py-1.5 text-xs md:text-sm rounded-full text-white font-medium"
-                style={{ backgroundColor: techLayers[selectedIndex].solidColor }}
-              >
-                {item}
-              </motion.span>
-            ))}
-          </div>
-          <p
-            className="text-xs md:text-sm mt-3 cursor-pointer hover:underline"
-            style={{ color: techLayers[selectedIndex].solidColor }}
+      <AnimatePresence>
+        {selectedIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
             onClick={() => setSelectedIndex(null)}
+            className="mt-8 max-w-5xl mx-auto p-8 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 relative cursor-pointer"
           >
-            click to close
-          </p>
-        </motion.div>
-      )}
+            <div className="flex items-center gap-3 mb-8 justify-center">
+              <div
+                className="w-4 h-4 rounded-full"
+                style={{ backgroundColor: techLayers[selectedIndex].solidColor }}
+              />
+              <h3 className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-white">
+                {techLayers[selectedIndex].name}
+              </h3>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              {techLayers[selectedIndex].items.map((item, i) => (
+                <TechIconCard
+                  key={item.name}
+                  item={item}
+                  delay={i * 0.05}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

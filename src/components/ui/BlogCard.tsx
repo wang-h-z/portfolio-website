@@ -61,11 +61,6 @@ export default function BlogCard({ post, index }: BlogCardProps) {
               ))}
             </div>
           )}
-
-          {/* Hover indicator */}
-          <div className="absolute bottom-6 right-6 text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity">
-            Read more →
-          </div>
         </div>
       </Link>
     </motion.div>
