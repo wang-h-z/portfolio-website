@@ -15,7 +15,7 @@ this [week's](https://leetcode.com/contest/weekly-contest-487/) problem list had
 3. [Design Ride Sharing System]() ✅
 4. [Longest Alternating Subarray]() :x:
 
- #### thought processes:
+ ### thought processes:
 
 1. [Count Monobit Integers](https://leetcode.com/problems/count-monobit-integers/) ✅
 ```` python
