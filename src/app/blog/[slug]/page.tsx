@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -72,6 +75,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Markdown Content */}
         <div className="prose prose-zinc dark:prose-invert max-w-none">
           <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw, rehypeSanitize]}
             components={{
               h1: ({ children }) => (
                 <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>
@@ -93,9 +98,56 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </code>
               ),
               pre: ({ children }) => (
-                <pre className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 overflow-x-auto">
+                <pre className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 overflow-x-auto my-4">
                   {children}
                 </pre>
+              ),
+              ul: ({ children }) => (
+                <ul className="list-disc list-inside mb-4 space-y-2">
+                  {children}
+                </ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="list-decimal list-inside mb-4 space-y-2">
+                  {children}
+                </ol>
+              ),
+              li: ({ children }) => (
+                <li className="text-zinc-700 dark:text-zinc-300">
+                  {children}
+                </li>
+              ),
+              blockquote: ({ children }) => (
+                <blockquote className="border-l-4 border-violet-500 pl-4 italic my-4 text-zinc-600 dark:text-zinc-400">
+                  {children}
+                </blockquote>
+              ),
+              table: ({ children }) => (
+                <div className="overflow-x-auto my-4">
+                  <table className="min-w-full border border-zinc-200 dark:border-zinc-800">
+                    {children}
+                  </table>
+                </div>
+              ),
+              th: ({ children }) => (
+                <th className="border border-zinc-200 dark:border-zinc-800 px-4 py-2 bg-zinc-50 dark:bg-zinc-900 font-semibold">
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td className="border border-zinc-200 dark:border-zinc-800 px-4 py-2">
+                  {children}
+                </td>
+              ),
+              img: ({ src, alt }) => (
+                <img
+                  src={src}
+                  alt={alt || ''}
+                  className="rounded-lg my-4 max-w-full h-auto"
+                />
+              ),
+              hr: () => (
+                <hr className="my-8 border-zinc-200 dark:border-zinc-800" />
               ),
               a: ({ href, children }) => {
                 // Check if it's an internal link (starts with /blog/)
