@@ -27,12 +27,6 @@ class Solution:
         #there is only 1 "all zero" which is 0
         # count all possible "same" 1s
 
-        # 0, 1, 3, 5, 7,
-
-        # 0, 1, 3, 5, 7, 
-        # 0, 1, 3, 7, 15, 
-
-
         if n == 1:
             return 2
 
