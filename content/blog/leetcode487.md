@@ -71,3 +71,44 @@ class Solution:
     def finalElement(self, nums: List[int]) -> int:
         return max(nums[0], nums[len(nums) - 1])
 ````
+
+3. [Design Ride Sharing System](https://leetcode.com/problems/design-ride-sharing-system/description/) ✅
+
+````python
+from collections import deque
+class RideSharingSystem:
+
+    def __init__(self):
+        self.riderQ = deque()
+        self.driverQ = deque()
+
+    def addRider(self, riderId: int) -> None:
+        self.riderQ.append(riderId)
+        # print(self.riderQ)
+
+    def addDriver(self, driverId: int) -> None:
+        self.driverQ.append(driverId)
+        # print(self.driverQ)
+
+    def matchDriverWithRider(self) -> List[int]:
+        # print(self.riderQ, self.driverQ)
+        if not self.riderQ or not self.driverQ:
+            return [-1, -1]
+        else: 
+            return [self.driverQ.popleft(), self.riderQ.popleft(), ]
+
+    def cancelRider(self, riderId: int) -> None:
+        if riderId in self.riderQ: 
+            self.riderQ.remove(riderId)
+
+
+# Your RideSharingSystem object will be instantiated and called as such:
+# obj = RideSharingSystem()
+# obj.addRider(riderId)
+# obj.addDriver(driverId)
+# param_3 = obj.matchDriverWithRider()
+# obj.cancelRider(riderId)
+````
+
+this question was relatively straightforward, the question also even hints at you to use a queue data structure. i guess the only thing to really improve in my solution would be the cancelRider() function, which is currently O(n) if len(self.riderQ) is n. However, my answer still lucky passes the time constraints :p
+
