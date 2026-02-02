@@ -6,6 +6,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -92,15 +94,28 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {children}
                 </p>
               ),
-              code: ({ children }) => (
-                <code className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-sm">
-                  {children}
-                </code>
-              ),
-              pre: ({ children }) => (
-                <pre className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 overflow-x-auto my-4">
-                  {children}
-                </pre>
+              code: ({ node, inline, className, children, ...props }: any) => {
+                const match = /language-(\w+)/.exec(className || '');
+                const language = match ? match[1] : '';
+                
+                return !inline && language ? (
+                  <SyntaxHighlighter
+                    style={oneDark}
+                    language={language}
+                    PreTag="div"
+                    className="rounded-lg my-4"
+                    {...props}
+                  >
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-sm font-mono" {...props}>
+                    {children}
+                  </code>
+                );
+              },
+              pre: ({ children }: any) => (
+                <div className="my-4">{children}</div>
               ),
               ul: ({ children }) => (
                 <ul className="list-disc list-inside mb-4 space-y-2">

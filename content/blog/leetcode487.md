@@ -19,6 +19,7 @@ current rating: not placed yet
  ### thought processes:
 
 1. [Count Monobit Integers](https://leetcode.com/problems/count-monobit-integers/) ✅
+
 ```` python
 import math
 class Solution:
@@ -60,7 +61,7 @@ this question lowk triggered me, i've seen enough alice and bob games man
 
 initially, i wanted to implement a turn based solution that would explore some form of decision tree, but i realised i had to keep track of the state of the game constantly and the solution was abit too complex given the time crunch
 
-then i realised this question was really similar to another [alice and bob game ](https://leetcode.com/problems/stone-game/description/), where the solution could be extremely trivial. 
+then i realised this question was really similar to another [alice and bob game](https://leetcode.com/problems/stone-game/description/), where the solution could be extremely trivial. 
 
 i figured since alice wants to maximise the result she may always pick the smallest possible subarray and since bob wants to minimize the result he may always pick the largest possible subarray. this would lead to alice just picking the smallest element, and then bob picking the largest possible contiguous subarray that would result in one "end" having the smaller element. 
 
