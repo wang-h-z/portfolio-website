@@ -99,7 +99,7 @@ class RideSharingSystem:
         if not self.riderQ or not self.driverQ:
             return [-1, -1]
         else: 
-            return [self.driverQ.popleft(), self.riderQ.popleft(), ]
+            return [self.driverQ.popleft(), self.riderQ.popleft()]
 
     def cancelRider(self, riderId: int) -> None:
         if riderId in self.riderQ: 
