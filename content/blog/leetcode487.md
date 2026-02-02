@@ -10,9 +10,11 @@ tags: []
 
 this [week's](https://leetcode.com/contest/weekly-contest-487/) problem list had:
 1. [Count Monobit Integers](https://leetcode.com/problems/count-monobit-integers/) ✅
-2. [Final Element After Subarray Deletions](https://leetcode.com/problems/final-element-after-subarray-deletions/) :x:
+2. [Final Element After Subarray Deletions](https://leetcode.com/problems/final-element-after-subarray-deletions/) ❌
 3. [Design Ride Sharing System]() ✅
-4. [Longest Alternating Subarray]() :x:
+4. [Longest Alternating Subarray](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/description/) ❌
+
+current rating: not placed yet
 
  ### thought processes:
 
@@ -41,7 +43,7 @@ class Solution:
 this question was lowkeniuenly kinda easy (i mean it is easy difficulty) but i choked hella on it and spent ~20 minutes on it because i couldn't figure out the math behind it (i realise im cheeks at bit questions) 
 initially went with a solution that used division by 2 but realised it was much easier to just use math.log(). the intuition behind this question is to find the number of integers that are represented by all 1s (monobit) which are equal or lesser to n. these integers are always -1 from a power of 2 (more formally 2^k - 1). So for even cases of n, it is enough to just return the number of powers of 2 that is lesser or equal to n. for odd cases, it is abit trickier because the number itself could be a monobit integer, so we add 1 to n to see if it becomes a power of 2 (it is not good enough to just find the floor). the final "+1" at the end of both cases is to account for the monobit 0
 
-2. [Final Element After Subarray Deletions](https://leetcode.com/problems/final-element-after-subarray-deletions/) :x:
+2. [Final Element After Subarray Deletions](https://leetcode.com/problems/final-element-after-subarray-deletions/) ❌
 
 ````python
 # DID NOT SOLVE
@@ -112,3 +114,10 @@ class RideSharingSystem:
 
 this question was relatively straightforward, the question also even hints at you to use a queue data structure. i guess the only thing to really improve in my solution would be the cancelRider() function, which is currently O(n) if len(self.riderQ) is n. However, my answer still lucky passes the time constraints :p
 
+4. [Longest Alternating Subarray](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/description/) ❌
+
+````python
+# DID NOT FINISH
+````
+
+ok this question was legitamtely crazy.
