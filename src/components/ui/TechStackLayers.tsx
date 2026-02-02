@@ -118,6 +118,8 @@ function TechIconCard({ item, delay }: { item: TechItem; delay: number }) {
               alt={item.name}
               fill
               className="object-contain"
+              priority
+              loading="eager"
             />
           </div>
         </div>
@@ -136,6 +138,8 @@ function TechIconCard({ item, delay }: { item: TechItem; delay: number }) {
               alt={item.name}
               fill
               className="object-contain"
+              priority
+              loading="eager"
             />
           </div>
           <p className="text-[8px] sm:text-xs font-bold text-zinc-700 dark:text-zinc-300 text-center whitespace-nowrap">
@@ -150,6 +154,16 @@ function TechIconCard({ item, delay }: { item: TechItem; delay: number }) {
 export default function TechStackLayers() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  // Preload all tech icons on component mount
+  React.useEffect(() => {
+    techLayers.forEach((layer) => {
+      layer.items.forEach((item) => {
+        const img = new window.Image();
+        img.src = `/assets/tech-icons/${item.icon}`;
+      });
+    });
+  }, []);
 
   const handleCardClick = (index: number) => {
     if (selectedIndex === index) {
