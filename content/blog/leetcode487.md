@@ -18,7 +18,7 @@ current rating: not placed yet
 
  ### thought processes:
 
-1. Count Monobit Integers](https://leetcode.com/problems/count-monobit-integers/) ✅
+[1. Count Monobit Integers](https://leetcode.com/problems/count-monobit-integers/) ✅
 
 
 ```` python
