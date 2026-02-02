@@ -8,6 +8,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { MarkdownLink } from '@/components/ui/MarkdownLink';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -164,50 +165,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               hr: () => (
                 <hr className="my-8 border-zinc-200 dark:border-zinc-800" />
               ),
-              a: ({ href, children }) => {
-                // Check if it's an anchor link (starts with #)
-                const isAnchor = href?.startsWith('#');
-                // Check if it's an internal link (starts with /blog/)
-                const isInternal = href?.startsWith('/blog/');
-                
-                if (isAnchor && href) {
-                  return (
-                    <a
-                      href={href}
-                      className="text-violet-600 dark:text-violet-400 hover:underline"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const element = document.querySelector(href);
-                        element?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                    >
-                      {children}
-                    </a>
-                  );
-                }
-                
-                if (isInternal && href) {
-                  return (
-                    <Link
-                      href={href}
-                      className="text-violet-600 dark:text-violet-400 hover:underline"
-                    >
-                      {children}
-                    </Link>
-                  );
-                }
-                
-                return (
-                  <a
-                    href={href}
-                    className="text-violet-600 dark:text-violet-400 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {children}
-                  </a>
-                );
-              },
+              a: (props) => <MarkdownLink {...props} />,
             }}
           >
             {post.content}
