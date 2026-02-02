@@ -97,16 +97,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {children}
                 </pre>
               ),
-              a: ({ href, children }) => (
-                <a
-                  href={href}
-                  className="text-violet-600 dark:text-violet-400 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {children}
-                </a>
-              ),
+              a: ({ href, children }) => {
+                // Check if it's an internal link (starts with /blog/)
+                const isInternal = href?.startsWith('/blog/');
+                
+                if (isInternal && href) {
+                  return (
+                    <Link
+                      href={href}
+                      className="text-violet-600 dark:text-violet-400 hover:underline"
+                    >
+                      {children}
+                    </Link>
+                  );
+                }
+                
+                return (
+                  <a
+                    href={href}
+                    className="text-violet-600 dark:text-violet-400 hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {children}
+                  </a>
+                );
+              },
             }}
           >
             {post.content}
