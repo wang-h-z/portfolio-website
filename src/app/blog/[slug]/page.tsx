@@ -165,8 +165,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <hr className="my-8 border-zinc-200 dark:border-zinc-800" />
               ),
               a: ({ href, children }) => {
+                // Check if it's an anchor link (starts with #)
+                const isAnchor = href?.startsWith('#');
                 // Check if it's an internal link (starts with /blog/)
                 const isInternal = href?.startsWith('/blog/');
+                
+                if (isAnchor && href) {
+                  return (
+                    <a
+                      href={href}
+                      className="text-violet-600 dark:text-violet-400 hover:underline"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.querySelector(href);
+                        element?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      {children}
+                    </a>
+                  );
+                }
                 
                 if (isInternal && href) {
                   return (
