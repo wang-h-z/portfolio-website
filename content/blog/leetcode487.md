@@ -4,10 +4,9 @@ project: "leetcode"
 summary: "lowk got fried"
 author: "me"
 date: "2 Feb 2026"
-readTime: "5 min read"
+readTime: "10 min read"
 tags: []
 ---
-## weekly contest 487
 
 this [week's](https://leetcode.com/contest/weekly-contest-487/) problem list had:
 1. [Count Monobit Integers](https://leetcode.com/problems/count-monobit-integers/) ✅
@@ -44,3 +43,31 @@ initially went with a solution that used division by 2 but realised it was much 
 
 2. [Final Element After Subarray Deletions](https://leetcode.com/problems/final-element-after-subarray-deletions/) :x:
 
+````python
+# DID NOT SOLVE
+class Solution:
+    def finalElement(self, nums: List[int]) -> int:
+
+        return min(nums)
+````
+
+this question lowk triggered me, i've seen enough alice and bob games man
+
+![played these games before](https://media1.tenor.com/m/5LVEjoNtey4AAAAd/i-have-played-these-games-before-seong-gi-hun.gif)
+
+initially, i wanted to implement a turn based solution that would explore some form of decision tree, but i realised i had to keep track of the state of the game constantly and the solution was abit too complex given the time crunch
+
+then i realised this question was really similar to another [alice and bob game ](https://leetcode.com/problems/stone-game/description/), where the solution could be extremely trivial. 
+
+i figured since alice wants to maximise the result she may always pick the smallest possible subarray and since bob wants to minimize the result he may always pick the largest possible subarray. this would lead to alice just picking the smallest element, and then bob picking the largest possible contiguous subarray that would result in one "end" having the smaller element. 
+
+i realised that this thinking was actually on the right track but was confused by what alice should do. a counter example to what was mentioned above would be nums = [11, 5, 2]. alice could pick the subarray [5, 2] and the game would end at [11], which is the best case scenario. 
+
+To simplify the problem, we can actually say that each player can has the option to delete everything except the first element or everything except the last element, <u>because effectively this is the only optimal move they can make.</u> So if alice wants to maximise the final element, she can look at nums[0] or nums[-1]. if she pops any other subarray to try to get a middle element and hands control to bob, then bob would just pop that element and any other surrounding element. so alice should just effectively find the best case answer from the ends of the array as bob would optimally not give her any element in the middle
+
+````python
+# accepted solution
+class Solution:
+    def finalElement(self, nums: List[int]) -> int:
+        return max(nums[0], nums[len(nums) - 1])
+````
