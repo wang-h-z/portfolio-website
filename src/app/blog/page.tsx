@@ -6,6 +6,8 @@ export const revalidate = 3600;
 
 export default function BlogPage() {
   const posts = getAllPosts();
+  // sort posts by date descending (newest first)
+  const postsSortedByDate = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const groupedPosts = getPostsSortedByProject();
 
   return (
@@ -22,7 +24,7 @@ export default function BlogPage() {
         </div>
 
         {/* Blog List with sorting */}
-        <BlogList posts={posts} groupedPosts={groupedPosts} />
+        <BlogList posts={postsSortedByDate} groupedPosts={groupedPosts} />
       </div>
     </main>
   );

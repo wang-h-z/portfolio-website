@@ -114,7 +114,37 @@ class RideSharingSystem:
 # obj.cancelRider(riderId)
 ````
 
-this question was relatively straightforward, the question also even hints at you to use a queue data structure. i guess the only thing to really improve in my solution would be the cancelRider() function, which is currently O(n) if len(self.riderQ) is n. However, my answer still passes the time constraints :p (luckily)
+this question was relatively straightforward, the question also even hints at you to use a queue data structure. to really improve my solution would be the cancelRider() function, which is currently O(n) if len(self.riderQ) is n. 
+
+there are many solutions/improvements that i saw (such as using a bitset/using a active/cancelled pool), but i think the most interesting improvement i saw was this [solution](https://leetcode.com/problems/design-ride-sharing-system/solutions/7541153/lazy-deletion-with-queues-using-the-tomb-xrkd/) that uses lazy deletion
+
+
+````python
+from collections import deque
+from typing import List
+
+class RideSharingSystem:
+    def __init__(self):
+        self.riderQ = deque()
+        self.driverQ = deque()
+        self.cancelled = set()
+
+    def cancelRider(self, riderId: int) -> None:
+        self.cancelled.add(riderId)
+
+    def matchDriverWithRider(self) -> List[int]:
+        # clean cancelled riders from front
+        while self.riderQ and self.riderQ[0] in self.cancelled:
+            self.cancelled.remove(self.riderQ[0])
+            self.riderQ.popleft()
+
+        if not self.riderQ or not self.driverQ:
+            return [-1, -1]
+
+        return [self.driverQ.popleft(), self.riderQ.popleft()]
+````
+
+
 
 [4. Longest Alternating Subarray](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/description/) ❌
 
@@ -198,4 +228,67 @@ return res
 
 this solution works and TC: O(n) and SC: O(n), but unfortunately this is not the most optimal solution although it's probably the one that is the easiest to digest
 
-there is an O(1) space solution that only requires one 1 pass instead of 3. 
+there is an O(1) space solution that only requires one 1 pass instead of 3.
+
+````python
+from typing import List
+
+class Solution:
+    def longestAlternating(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        def sgn(x: int) -> int:
+            if x > 0:
+                return 1
+            if x < 0:
+                return -1
+            return 0
+
+        # dp0: no removal used, ending at i
+        up0 = down0 = 1
+        # dp1: at most one removal used, ending at i
+        up1 = down1 = 1
+
+        # store dp0 at i-2 (needed when we "delete nums[i-1]" and connect i-2 -> i)
+        up0_2 = down0_2 = 1
+
+        ans = 1
+
+        for i in range(1, n):
+            diff1 = sgn(nums[i] - nums[i - 1])
+
+            # start fresh at i (length 1)
+            up0_new = down0_new = 1
+            up1_new = down1_new = 1
+
+            # extend without removal (use i-1 -> i)
+            if diff1 > 0:
+                up0_new = down0 + 1
+            elif diff1 < 0:
+                down0_new = up0 + 1
+
+            # extend with removal already used (still use i-1 -> i)
+            if diff1 > 0:
+                up1_new = max(up1_new, down1 + 1)
+            elif diff1 < 0:
+                down1_new = max(down1_new, up1 + 1)
+
+            # use the removal NOW by deleting nums[i-1], connect i-2 -> i
+            if i >= 2:
+                diff2 = sgn(nums[i] - nums[i - 2])
+                if diff2 > 0:
+                    up1_new = max(up1_new, down0_2 + 1)
+                elif diff2 < 0:
+                    down1_new = max(down1_new, up0_2 + 1)
+
+            ans = max(ans, up0_new, down0_new, up1_new, down1_new)
+
+            # shift for next iteration
+            up0_2, down0_2 = up0, down0
+            up0, down0 = up0_new, down0_new
+            up1, down1 = up1_new, down1_new
+
+        return ans
+````
+
+all in all, for a first contest experience i got fried, but i learnt alot of things like time management, trying to write cleaner code, and also how many LOC and what u use actually matters cuz i think im graded on how many % i beat in both the time and space consumption (also didnt know submitting wrong submissions gives penalty T.T)
