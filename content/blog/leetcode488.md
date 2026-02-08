@@ -1,9 +1,9 @@
 ---
-title: "leetcode contest XXX"
+title: "leetcode contest 488"
 project: "leetcode"
 summary: ""
 author: "me"
-date: "X XXX 2026"
+date: "8 Feb 2026"
 readTime: "10 min read"
 tags: []
 ---
