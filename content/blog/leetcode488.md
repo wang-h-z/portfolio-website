@@ -231,10 +231,27 @@ class Solution:
         return a[k][n][m] 
 ```
 
-this is a O(k * n * m) TC and SC solution. we can actually improve it by just not having the 3rd x dimension. at any given moment we only look "1 layer" backwards and we only actually need the exact kth pairs, so we don't really have to maintain every possible combination. by just filling up every possible index i, j up to the kth pair sequentially, we can just maintain a 2d array. 
+this is a O(k * n * m) TC and SC solution. we can actually improve it by just not having the 3rd x dimension. at any given moment we only look "1 layer" backwards and we only actually need the exact kth pairs, so we don't really have to maintain every possible xth pair.
+
+we can do this by having a curr, and prev state of the dp array. curr keeps track of the best possible outcome from x - 1 pair, while we explore the best possible outcome from x pairs.
 
 ```python
 class Solution:
     def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        n, m = len(nums1), len(nums2)
+        NEG = -10**30
 
+        prev = [[0] * (m + 1) for _ in range(n + 1)]  # dp[0]
+
+        for x in range(1, k + 1):
+            cur = [[NEG] * (m + 1) for _ in range(n + 1)]
+            for i in range(1, n + 1):
+                for j in range(1, m + 1):
+                    take = prev[i - 1][j - 1] + nums1[i - 1] * nums2[j - 1]
+                    cur[i][j] = max(take, cur[i - 1][j], cur[i][j - 1])
+            prev = cur
+
+        return prev[n][m]
 ```
+
+all in all, although i didnt improve in terms of no. of questions solved, still a very good contest experience! hope to do better for the next one. 
