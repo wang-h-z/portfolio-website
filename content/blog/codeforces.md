@@ -17,6 +17,6 @@ resources that i'll be mainly interacting with:
 2. [cp31 sheet](https://www.tle-eliminators.com/cp-sheet)
 
 ## content page
-- [part 1: Learning the Right Programming Language](#part-1-learning-the-right-programming-language)
+- 
 
-## part 1: learning the right programming language
+

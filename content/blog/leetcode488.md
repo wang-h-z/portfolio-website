@@ -1,7 +1,7 @@
 ---
 title: "leetcode contest 488"
 project: "leetcode"
-summary: ""
+summary: "slightly better but still got deep fried"
 author: "me"
 date: "8 Feb 2026"
 readTime: "10 min read"
@@ -36,6 +36,8 @@ class Solution:
         return res
 ```
 
+this question was alright, just used abit of simple math to solve it by just traversing the array from the back using an accumulator variable 
+
 [2. Merge Adjacent Equal Elements](https://leetcode.com/problems/merge-adjacent-equal-elements/description/) ✅
 
 ```python
@@ -55,6 +57,27 @@ class Solution:
                 s_l -= 1
             i += 1
 
+        return stack
+```
+
+recognised the pattern immediately, whcih was similar to [20. Valid Parantheses](https://leetcode.com/problems/valid-parentheses/description/) and [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/description/). 
+
+However, a huge room improvement would be to solve the question with a better runtime. Although my contest solution was O(n), I could simplify the solution a whole lot more. Because of this I only beat 20% of submissions, whereas I could've put my score up much further.
+
+A cleaner solution would be: 
+
+
+```python
+class Solution:
+    def mergeAdjacent(self, nums: List[int]) -> List[int]:
+        stack = []
+
+        for num in nums:
+            curr = num
+            while stack and stack[-1] == curr:
+                curr += stack.pop()
+            stack.append(curr)
+        
         return stack
 ```
 
@@ -85,6 +108,56 @@ class Solution:
                 # print(i, j, a1[i][j], a2[i][j], cost)
                 if cost <= k:
                     res += 1
+
+        return res
+```
+
+ok, this question took the bulk of my time during the contest. i could come up with the trivial solution as seen above, basically just storing all the possible subbaray costs, which is described as cost =  (max(nums[l..r]) - min(nums[l..r])) * (r - l + 1). however, there definitely could've been improvements as there is definitely repeated work being done in my solution.
+
+i definitely recognise that this kind of pattern is one of my weaker patterns, and i couldn't really even come up with the appropriate pattern to solve the question without any hints. 
+
+for this question, i think we can take a hint from the cost having the operation (r - l + 1) which points to a sort of sliding window technique, and the way the cost is structured hints to it as well. suppose we have a subarray nums[l..r] and nums[l2..r2] where l <= l2 <= r2 <= r. If the cost of nums[l..r] is <= k, then cost of nums[l2..r2] is also <= k. this means we should "greedily" expand the sliding window until the cost condition has been violated, then perhaps start shrinking the window from the left (since increasing l by shrinking from the left will decrease r - l + 1, decreasing the cost). 
+
+this segways to the next crux of the issue which is how we can properly store the max of a given window. since we usually use l and r to store the current window, we can use a deque to store the valid "max" and "min" values in the current window. at any given valid l and r, these queues will store all the possible max and min values in that window. instead of storing all the values, we will just keep these queues monotonic (front of max queue is largest, front of min queue is smallest). this will allow us to only keep the values that are only relevant to the current window. this works because suppose we have crossed the current window (l has advanced pass the previous max), then the next max has to be the next value in the queue, since the queue stores the next largest value in the current window.
+
+another point would be that we will store the index of the value in nums in the queues.
+
+with these two main ideas, we can write out a valid O(n) TC solution. 
+
+```python
+from collections import deque
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        
+        maxq = deque() 
+        minq = deque()
+        n = len(nums)
+        res, l, r = 0, 0, 0
+
+        while r < n: 
+            while maxq and nums[maxq[-1]] < nums[r]: # keep monotonic property of queue
+                maxq.pop()
+            maxq.append(r)
+
+            while minq and nums[minq[-1]] > nums[r]: 
+                minq.pop()
+            minq.append(r)
+
+            # print(maxq, minq, l, r)
+            while l <= r and (nums[maxq[0]] - nums[minq[0]]) * (r - l + 1) > k:
+                # print(l, r)
+                if maxq[0] == l:
+                    maxq.popleft() # the current max is going to be removed when i shrink
+                
+                if minq[0] == l: # the current min is going to be removed when i shrink
+                    minq.popleft()
+                
+                l += 1 # shrink window
+
+            
+            res += (r - l  + 1)
+            # print(r - l + 1)
+            r += 1
 
         return res
 ```
