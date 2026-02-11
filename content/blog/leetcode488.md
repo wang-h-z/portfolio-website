@@ -155,8 +155,8 @@ class Solution:
                 l += 1 # shrink window
 
             
-            res += (r - l  + 1)
-            # print(r - l + 1)
+            res += (r - l  + 1) # add all the valid subarrays in this window
+            # print(r - l + 1) 
             r += 1
 
         return res
@@ -183,4 +183,58 @@ class Solution:
                     a[x][i][j] = max(nums1[i] * nums2[j] + a[x - 1][i - 1][j - 1], a[x - 1][i - 1][j], a[x - 1][i][j - 1])
 
         return a[k][n][m]
+```
+
+i feel like i was geniuenly so close to solving this question as i was halfway trying to figure out the recurrence relation. at this point in the contest i had maybe about 20 minutes of time remaining. i ran into some indexing problems and ran out of time sadly.
+
+i need to read the question better because initially i wrote a heap-based algorithm which was completely off, i did not recognise the main hurdle of the question which was the fact that: 
+
+You must choose exactly k pairs of indices (i1, j1), (i2, j2), ..., (ik, jk) such that:
+
+0 <= i1 < i2 < ... < ik < n
+0 <= j1 < j2 < ... < jk < m
+
+hence, a simple popping of all possible pairs of tuples is not correct due to the fact that there is some "ordering" that needs to be maintained in the pairs of indices that we choose. 
+
+this immediately led me to think of a DP solution, where i wanted to come up with the recurrence relation first. in this question, there are 3 states that need to be tracked, i, j, and k, and we have a 0/1 knapsack kind of pattern where if we pick this current index (i/j) then we can't pick any i/j before this current index. 
+
+let us assume we have a magical array that stores all 3 states a[x][i][j], where a[x][i][j] = maximum score using x pairs at index i and index j
+
+then we can form this recurrence relation: a[x][i][j] = max(a[x - 1][i - 1][j - 1] + nums1[i] * nums2[j], a[x][i - 1][j], a[x][i][j - 1])
+
+let's break down what this relation means. at any given state of the problem, we can make 3 decisions, choose nums1[i] and nums2[j] to form a pair, or to skip in two ways: 1. skip the current i index, skip the current j index. 
+
+this is how we get: a[x - 1][i - 1][j - 1] + nums1[i] * nums2[j] (pick this current pair), a[x][i - 1][j] (skip i),  a[x][i][j - 1] (skip j)
+
+using this recurrence relation, we just have to fill the array bottom up and return the final state!
+
+```python
+class Solution:
+    def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        n = len(nums1)
+        m = len(nums2)
+        
+        a = [[([float('-inf')] * (m + 1)) for _ in range(n + 1)] for _ in range(k + 1)] #  + 1 for base cases
+        
+        for i in range(n + 1): # 0 pairs at any index's = value 0 
+            for j in range(m + 1):
+                a[0][i][j] = 0
+
+        # print(a)
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+                for x in range(1, k + 1):
+                    print(a[x - 1][i - 1][j - 1])
+                    a[x][i][j] = max(a[x - 1][i - 1][j - 1] + nums1[i - 1] * nums2[j - 1],
+                                     a[x][i - 1][j], a[x][i][j - 1])
+
+        return a[k][n][m] 
+```
+
+this is a O(k * n * m) TC and SC solution. we can actually improve it by just not having the 3rd x dimension. at any given moment we only look "1 layer" backwards and we only actually need the exact kth pairs, so we don't really have to maintain every possible combination. by just filling up every possible index i, j up to the kth pair sequentially, we can just maintain a 2d array. 
+
+```python
+class Solution:
+    def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+
 ```
