@@ -134,9 +134,56 @@ for (int i = 0; i < n; i++) {
 after k rounds, the k largest elements will be in the correct positions.
 this describes the **invariant** of the sorting algorithm.
 
+best case: O(n²)
+average case: O(n²)
+worst case: O(n²)
+
+runtime across all 3 stages do not change since we run both loops regardless of what happens 
+
 #### insertion sort
 
+insertion sort inserts (as the name suggests) each element in the array iteratively into its correct position in a sorted portion of the list, we slowly expand the sorted group as the sorting rounds go on.
+
+```c++
+// assume the first element is part of the sorted portion
+int n = nums.size();
+for (int i = 1; i < n; i++) {
+    int key = nums[i];
+    int j = i - 1;
+    while (j >= 0 && nums[j] > key) { // find correct index of current key
+        nums[j + 1] = nums[j];
+        j -= 1;
+    }
+    nums[j + 1] = key; // this index will be the correct position of the current key
+}
+```
+
+best case: O(n), if list is sorted
+average case: O(n²), if list is random
+worst case: O(n²), if list is reversed
+
 #### selection sort
+
+selection sort selects (as the name suggests) the smallest/largest (we will choose smallest here) element from its unsorted portion and swaps it with the first element in its unsorted portion. we expand the sorted portion by running this algorithm n rounds
+
+```c++
+int n = nums.size();
+for (int i = 0; i < n - 1; i++) {
+    int min_idx = i;
+    for (int j = i + 1; j < n; j++) { // find the minimum value of this sorted portion
+        if (nums[j] < nums[min_idx]) {
+            min_idx = j;
+        }
+    } 
+    swap(nums[min_idx], nums[i]);
+}
+```
+
+best case: O(n²)
+average case: O(n²)
+worst case: O(n²)
+
+
 
 
 
