@@ -19,9 +19,8 @@ resources that i'll be mainly interacting with:
 2. [cp31 sheet](https://www.tle-eliminators.com/cp-sheet)
 
 ## content page
-- 1. runtime analysis
-- 2. sorting 
-
+- [1. runtime analysis](#1-runtime-analysis)
+- [2. sorting](#2-sorting)
 
 ### 1. runtime analysis
 
@@ -63,9 +62,50 @@ for (int i = 0; i < n; i++) {
 
 return best;
 ```
+
 for this algorithm, we iterate through every subarray and accumulate the sum with a loop using the curr variable. this will give us an O(n³) runtime algorithm. 
 
 #### **second iteration:**
 
 ```c++
+int n = input.size();
+int best = 0;
+for (int i = 0; i < n; i++) {
+    int curr = 0;
+    for (int j = i; j < n; j++) {
+        curr += input[k];
+        best = max(curr, best);
+    }
+}
+
+return best;
 ```
+
+it is easy to improve the runtime by simply just removing the inner loop. this gives us a O(n²) algorithm
+
+#### **third iteration:**
+
+to further improve the runtime to O(n), we can actually break this problem down to consider the subproblems in this question. 
+
+consider finding a maximum subarray that ends at index k of an array. the maximum subarray is either:
+1. just the subarray that contains element k
+2. a subarray that ends at index k - 1, and includes index k. 
+
+in simpler terms, we either choose to include a subarray from index k - 1, or we just pick k.
+
+this gives rise to this one pass algorithm: 
+
+```c++
+int n = input.size();
+int best = 0;
+int curr = 0;
+for (int i = 0; i < n; i++) {
+    curr = max(curr + input[k], input[k]);
+    best = max(best, curr);  
+}
+return best;
+```
+
+
+
+
