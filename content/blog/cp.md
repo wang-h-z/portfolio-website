@@ -25,7 +25,7 @@ resources that i'll be mainly interacting with:
 
 ### 1. runtime analysis
 
-#### estimating efficiency
+#### **estimating efficiency**
 
 | Input Size | Required Time Complexity |
 |------------|-------------------------|
@@ -36,7 +36,36 @@ resources that i'll be mainly interacting with:
 | n ≤ 10⁶ | O(n log n) or O(n) |
 | n is large | O(1) or O(log n) |
 
-#### maximum subarray sum
+#### **maximum subarray sum**
 
 we wil use this simple subarray problem to illustrate how to improve the runtime of an algorithm sequentially
 
+input: {-1, 2, 4, -3, 5, 2, -5, 2}
+
+output: 12 
+
+explanation: the subarray {2, 4, -3, 5, 2,} will give the maximum sum
+
+#### **first iteration:**
+
+```c++
+int n = input.size();
+int best = 0;
+for (int i = 0; i < n; i++) {
+    for (int j = i; j < n; j++) {
+        int curr = 0;
+        for (int k = i; k <= j; k++) {
+            curr += input[k];
+        }
+        best = max(curr, best);
+    }
+}
+
+return best;
+```
+for this algorithm, we iterate through every subarray and accumulate the sum with a loop using the curr variable. this will give us an O(n³) runtime algorithm. 
+
+#### **second iteration:**
+
+```c++
+```
