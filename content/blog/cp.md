@@ -109,3 +109,36 @@ return best;
 
 
 
+
+### 2. sorting
+
+sorting is a fundamental algorithm design problem. the general efficent sorting algo works in O(n log n).
+
+#### O(n²) algorithms
+
+#### bubble sort
+
+bubble sort consists of n rounds. at each round, we iterate through the elements of the array, when two elements are found not in its right order, we swap them
+
+```c++
+int n = nums.size();
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j <  n - 1; j++) {
+        if (nums[j] > nums[j + 1]) {
+            swap(nums[j], nums[j + 1]);
+        }
+    }
+}
+```
+
+after k rounds, the k largest elements will be in the correct positions.
+this describes the **invariant** of the sorting algorithm.
+
+#### insertion sort
+
+#### selection sort
+
+
+
+
+
