@@ -114,7 +114,7 @@ return best;
 
 sorting is a fundamental algorithm design problem. the general efficent sorting algo works in O(n log n). let's cover some O(n²) algorithms first
 
-#### bubble sort
+### bubble sort
 
 bubble sort consists of n rounds. at each round, we iterate through the elements of the array, when two elements are found not in its right order, we swap them
 
@@ -138,7 +138,7 @@ worst case: O(n²)
 
 runtime across all 3 stages do not change since we run both loops regardless of what happens 
 
-#### insertion sort
+### insertion sort
 
 insertion sort inserts (as the name suggests) each element in the array iteratively into its correct position in a sorted portion of the list, we slowly expand the sorted group as the sorting rounds go on.
 
@@ -160,7 +160,7 @@ best case: O(n), if list is sorted
 average case: O(n²), if list is random
 worst case: O(n²), if list is reversed
 
-#### selection sort
+### selection sort
 
 selection sort selects (as the name suggests) the smallest/largest (we will choose smallest here) element from its unsorted portion and swaps it with the first element in its unsorted portion. we expand the sorted portion by running this algorithm n rounds
 
@@ -182,7 +182,7 @@ average case: O(n²)
 worst case: O(n²)
 
 
-#### merge sort
+### merge sort
 
 merge sort is a divide and conquer style of sorting algorithm which recursively (in this version) merges (wow what a suprise) sorted portions of a broken down array
 
@@ -239,11 +239,11 @@ vector<int> mergeSort(vector<int> arr) {
 }
 ```
 
-#### lower bound of sorting
+### lower bound of sorting
 
 it is not possible to get a comparative sorting algorithm that does better than O(nlogn) unless we use additional information about the array
 
-#### counting sort
+### counting sort
 
 if we have an array of size n that and the range of values is 0 .. c where c = O(n), we can use a "bookkeeping" array of size n to count (wow) the number of occurences of the values and build the sorted array from there
 
@@ -267,4 +267,4 @@ for (int i = 0; i <= max_val; i++) {
 
 this gives a O(n) algo with O(n) space incurred. 
 
-#### binary search
+### binary search
