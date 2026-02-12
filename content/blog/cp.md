@@ -268,3 +268,32 @@ for (int i = 0; i <= max_val; i++) {
 this gives a O(n) algo with O(n) space incurred. 
 
 ### binary search
+
+searching for an element usually requires scanning the entire array, which is O(n), however if the array is sorted, we can use a divide and conquer algorithm know as binary search to search for an element
+
+### method 1
+
+this is the traditional D&C binary search algorithm that halves the search space at each round
+
+```c++
+int n = arr.size();
+int l = 0;
+int r = n - 1;
+
+while (l <= r) {
+    int mid = l + (r - l) / 2;
+    if (arr[mid] == target) {
+        return mid;
+    }
+    if (target < arr[mid]) {
+        r = mid - 1;
+    } else {
+        l = mid + 1;
+    }
+}
+
+return -1;
+```
+
+### method 2
+there is another version of binary search 
