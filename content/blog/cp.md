@@ -296,4 +296,15 @@ return -1;
 ```
 
 ### method 2
-there is another version of binary search 
+there is another version of binary search. we will go through the arary from left to right, making an initial jump of n/2, at each tep, we half the jump length until it is 1. 
+
+```c++
+int n = arr.size();
+int i = 0;
+for (int j = n / 2; b >= 1; b /= 2) {
+    while (i + j < n && array[i + j] <= x) i += j;
+}
+
+if (array[i] == target) return i;
+return -1; // not found
+```
