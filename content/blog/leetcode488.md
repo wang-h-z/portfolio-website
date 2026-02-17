@@ -8,7 +8,7 @@ readTime: "10 min read"
 tags: []
 ---
 
-this [week's]() problem list had:
+this [week's](https://leetcode.com/contest/weekly-contest-488/) problem list had:
 1. [3833. Count Dominant Indices](https://leetcode.com/problems/count-dominant-indices/description/) ✅
 2. [3834. Merge Adjacent Equal Elements](https://leetcode.com/problems/merge-adjacent-equal-elements/description/) ✅
 3. [3835. Count Subarrays With Cost Less Than or Equal to K](https://leetcode.com/problems/count-subarrays-with-cost-less-than-or-equal-to-k/description/) ❌
