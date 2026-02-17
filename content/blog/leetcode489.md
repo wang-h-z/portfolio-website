@@ -87,7 +87,7 @@ class Solution:
         return -1
 ```
 
-3. [3844. Longest Almost-Palindromic Substring](https://leetcode.com/problems/longest-almost-palindromic-substring/) ❌
+[3. 3844. Longest Almost-Palindromic Substring](https://leetcode.com/problems/longest-almost-palindromic-substring/) ❌
 
 ```python
 class Solution:
@@ -203,4 +203,13 @@ class Solution:
             res = max(res, almP(i, i), almP(i, i + 1))
 
         return res
+```
+
+there is also a DP pattern solution that uses another pattern from a somewhat known problem [1312. Minimum Insertion Steps to Make a String Palindrome](https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/) which i have yet to encounter as well.
+
+
+[4. 3845. Maximum Subarray XOR with Bounded Range](https://leetcode.com/problems/maximum-subarray-xor-with-bounded-range/) ❌
+
+```python
+# DID NOT FINISH
 ```
