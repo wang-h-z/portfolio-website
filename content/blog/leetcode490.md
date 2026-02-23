@@ -1,5 +1,5 @@
 ---
-title: "leetcode contest XXX"
+title: "leetcode contest 490"
 project: "leetcode"
 summary: "first 3/4 solved!"
 author: "me"
