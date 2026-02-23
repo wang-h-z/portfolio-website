@@ -4,7 +4,7 @@ project: "leetcode"
 summary: "one step forward, two steps back"
 author: "me"
 date: "15 Feb 2026"
-readTime: "1 min read"
+readTime: "10 min read"
 tags: []
 ---
 
