@@ -222,4 +222,11 @@ the second pattern is something totally foreign to me. it's a trie + XOR pattern
 
 to educate myself on this trie + XOR pattern, i decide to do a related question [421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/).
 
-to introduce this pattern quickly, 
+to introduce this pattern quickly, we use a trie to store each number in the array. suppose we want to find the pairwise XOR value of a given num, we can query this trie to efficiently get a XOR partner.
+
+so, we combine these two patterns + using a prefix XOR array since we are dealing with XOR subarray and not pairwise XORs. we use prefix XOR array to query a XOR subarray since XOR(l..r) = prefix[l - 1] ^ prefix[r]
+
+with that, we can try to solve this qn XD
+
+```python
+```
