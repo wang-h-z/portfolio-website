@@ -213,3 +213,13 @@ there is also a DP pattern solution that uses another pattern from a somewhat kn
 ```python
 # DID NOT FINISH
 ```
+
+ok this is genuienly an insane question. there are two major patterns involved in this question.
+
+the first pattern is the sliding window + maintaing max/min values in the window pattern. this is really similar to last week contest's [3835. Count Subarrays With Cost Less Than or Equal to K](https://leetcode.com/problems/count-subarrays-with-cost-less-than-or-equal-to-k/description/). 
+
+the second pattern is something totally foreign to me. it's a trie + XOR pattern. initially, i thought it was sufficient to just maintain a sum variable that just greedily XOR the left and right values depending on the boundaries of the window. however, the maximum XOR subarray can exist inside the valid window, and there is no efficient way to find the inner subarray XORs in the window without simply iterating over all possible subarrays
+
+to educate myself on this trie + XOR pattern, i decide to do a related question [421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/).
+
+to introduce this pattern quickly, 
