@@ -226,7 +226,7 @@ to introduce this pattern quickly, we use a trie to store each number in the arr
 
 so, we combine these two patterns + using a prefix XOR array since we are dealing with XOR subarray and not pairwise XORs. we use prefix XOR array to query a XOR subarray since XOR(l..r) = prefix[l - 1] ^ prefix[r]
 
-with that, we can try to solve this qn XD
+with that, we can try to solve this qn :D
 
 ```python
 ```
