@@ -220,7 +220,7 @@ the first pattern is the sliding window + maintaing max/min values in the window
 
 the second pattern is something totally foreign to me. it's a trie + XOR pattern. initially, i thought it was sufficient to just maintain a sum variable that just greedily XOR the left and right values depending on the boundaries of the window. however, the maximum XOR subarray can exist inside the valid window, and there is no efficient way to find the inner subarray XORs in the window without simply iterating over all possible subarrays
 
-to educate myself on this trie + XOR pattern, i decide to do a related question [421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/).
+to educate myself on this trie + XOR pattern, i decided to do a related question [421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/).
 
 to introduce this pattern quickly, we use a trie to store each number in the array. suppose we want to find the pairwise XOR value of a given num, we can query this trie to efficiently get a XOR partner.
 
