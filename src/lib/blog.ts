@@ -70,18 +70,18 @@ export function getPostsSortedByProject(): Record<string, BlogPost[]> {
   const posts = getAllPosts();
   const grouped: Record<string, BlogPost[]> = {};
 
-  posts.forEach(post => {
+  for (const post of posts) {
     const project = post.project || 'Uncategorized';
     if (!grouped[project]) {
       grouped[project] = [];
     }
     grouped[project].push(post);
-  });
+  }
 
-  // Sort posts within each project by date
-  Object.keys(grouped).forEach(project => {
-    grouped[project].sort((a, b) => (a.date < b.date ? 1 : -1));
-  });
+  // Sort posts within each project by date descending (newest first)
+  for (const project in grouped) {
+    grouped[project].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }
 
   return grouped;
 }
