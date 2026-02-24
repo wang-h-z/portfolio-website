@@ -224,9 +224,109 @@ to educate myself on this trie + XOR pattern, i decided to do a related question
 
 to introduce this pattern quickly, we use a trie to store each number in the array. suppose we want to find the pairwise XOR value of a given num, we can query this trie to efficiently get a XOR partner.
 
-so, we combine these two patterns + using a prefix XOR array since we are dealing with XOR subarray and not pairwise XORs. we use prefix XOR array to query a XOR subarray since XOR(l..r) = prefix[l - 1] ^ prefix[r]
+so, we combine these two patterns + using a prefix XOR array since we are dealing with XOR subarray and not pairwise XORs. we use prefix XOR array to query a XOR subarray, XOR(l..r) = prefix[l] ^ prefix[r+ 1], where prefix[i] is the cumulative XOR from 0 to nums[i - 1]. then we will use the trie to store these prefix XORs to query the best XOR partner.
 
 with that, we can try to solve this qn :D
 
+the main idea is we are going to maintain a sliding window that satisifes the condition of the max - min <= k. we are going to use max and min queues to maintain the current window's maximum and minimum values. 
+
+once we have determined a valid window, we will try to find the maximum XOR subarray in that window.
+
 ```python
+from collections import deque
+class TrieNode:
+    def __init__(self):
+        self.count = 0 # keeps track of how many prefixes has this bit
+        self.child = [None, None] # child[0] -> 0bit child node, child[1] -> 1bit child node
+
+class Solution:
+    def maxXor(self, nums: list[int], k: int) -> int:
+        n = len(nums)
+        prefix = [0] * (n + 1) # prefix[i] stores the total XOR from 0 to nums[i - 1], excluding prefix[0]
+
+        # xor(l..r) = prefix[l] ^ prefix[r + 1] 
+        # in the sliding window, prefix[r + 1] is easily accessible to find using prefix[r], but the most optimal prefix[l] may be hard to find 
+        # use a trie to query the best matching XOR
+
+        for i in range(n): 
+            prefix[i + 1] = prefix[i] ^ nums[i]
+
+        # print(prefix[1] ^ prefix[3] == 4 ^ 5) # sanity check
+        
+        root = TrieNode() # trie will store prefix[l's], we will store the matching "starts" to calculate the subarray xors with
+
+        # helper functions to insert and remove from the trie
+        def insert(num):
+            curr_node = root
+            for i in range(31, -1, -1): # go from MSB to LSB
+                curr_bit = (num >> i) & 1
+                if not curr_node.child[curr_bit]:
+                    curr_node.child[curr_bit] = TrieNode()
+                curr_node = curr_node.child[curr_bit]
+                curr_node.count += 1
+
+        def remove(num):
+            curr_node = root
+            for i in range(31, -1, -1): 
+                # print(num)
+                curr_bit = (num >> i) & 1
+                curr_node.child[curr_bit].count -= 1
+                curr_node = curr_node.child[curr_bit]
+        
+        def best_xor(num):
+            curr_node = root
+            res = 0
+            for i in range(31, -1, -1):
+                curr_bit = (num >> i) & 1
+                optimal_match = 1 - curr_bit
+                # print(curr_node, curr_bit, num)
+                if curr_node.child[optimal_match] and curr_node.child[optimal_match].count > 0: 
+                    res |= 1 << i
+                    curr_node = curr_node.child[optimal_match]
+                elif curr_node.child[curr_bit] and curr_node.child[curr_bit].count > 0:
+                    curr_node = curr_node.child[curr_bit]
+                else: 
+                    # print("shouldnt reach here, there should always be a element in the node")
+                    return 0
+
+            return res
+
+        # print(insert(5)) # sanity check
+        # print(remove(5)) # sanity check
+        # insert(5)
+        # insert(2)
+        # print(best_xor(5))
+        
+        # sliding window with min and max deques to keep track of window min and maxes
+        res = 0
+        l = 0
+        maxq = deque() # keeps track of the current max values in the window -> strictly descending
+        minq = deque() # keeps track of the current min values in the window -> strictly ascending
+        insert(prefix[0]) # insert prefix[0] for first window of [nums[0]]
+        for r in range(n):
+            # maintain maxq and minq properties
+            while maxq and nums[maxq[-1]] < nums[r]:
+                maxq.pop()
+            maxq.append(r)
+
+            while minq and nums[minq[-1]] > nums[r]:
+                minq.pop()
+            minq.append(r)
+
+            while l <= r and maxq and minq and nums[maxq[0]] - nums[minq[0]] > k:
+                if maxq[0] == l:
+                    maxq.popleft()
+
+                if minq[0] == l: 
+                    minq.popleft()
+                
+                remove(prefix[l]) # remove the prefix from this index 
+                l += 1
+                
+
+            # find best matching XOR_value 
+            res = max(res, best_xor(prefix[r + 1])) # xor(l..r) = prefix[l] ^ prefix[r + 1] 
+            insert(prefix[r + 1])
+
+        return res
 ```
