@@ -8,7 +8,7 @@ readTime: "1 min read"
 tags: []
 ---
 
-this [week's]() problem list had:
+this [week's](https://leetcode.com/contest/weekly-contest-491/) problem list had:
 
 1. [3856. Trim Trailing Vowels](https://leetcode.com/problems/trim-trailing-vowels/description/) ✅
 2. [3857. Minimum Cost to Split into Ones](https://leetcode.com/problems/minimum-cost-to-split-into-ones/description/) ✅
