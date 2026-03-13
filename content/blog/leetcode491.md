@@ -1,7 +1,7 @@
 ---
 title: "leetcode contest 491"
 project: "leetcode"
-summary: "have  hit my upper bound XD"
+summary: "have i hit my upper bound XD"
 author: "me"
 date: "Mar 1 2026"
 readTime: "1 min read"
