@@ -135,3 +135,16 @@ class Solution:
         return res
 ```
 
+during the contest i correctly identified this problem as a search problem, and each operation can be seen as a decision on the decision tree
+
+attempetd to conduct a complete search using a backtracking algorithm, initially i did not have the gcd logic, and just used the python built in division method. however i quickly realised there is a floating point drift problem where multiple divisions end up (exacerbated by the backtracking which causes multiple division) causing the result to drift away (small floating point errors add up)
+
+the gcd function only uses multiplication and finding the gcd of the num and den by doing whole number division, avoiding the floating point drift
+
+my solution is correct but fails the time constraint. 
+
+there is a new pattern, known as man in the middle search, which i was not aware to. 
+
+so we need to answer how does MITM search work and why this pattern can be applied to this pattern.
+
+MITM search
