@@ -95,6 +95,43 @@ class Solution:
 
 [4. 3850. Count Sequences to K](https://leetcode.com/problems/count-sequences-to-k/) ❌
 ```python
-# DID NOT ATTEMPT
+from math import gcd
+class Solution:
+    def countSequences(self, nums: List[int], k: int) -> int:
+        res = 0
+        num, den = 1, 1
+        n = len(nums)
+
+        def reduce_pair(a, b):
+            g = gcd(a, b)
+            a //= g
+            b //= g
+
+            return a, b
+        
+        def backtrack(i): 
+            nonlocal res, num, den
+            if i == n: 
+                if num == k * den:
+                    res += 1
+                return
+                    
+            curr = nums[i]
+            num_copy, den_copy = num, den
+            # multiple
+            num, den = reduce_pair(num * curr, den)
+            backtrack(i + 1)
+            num, den = num_copy, den_copy
+            
+            # division, safe as there is no division by 0
+            num, den = reduce_pair(num, den * curr)
+            backtrack(i + 1)
+            num, den = num_copy, den_copy
+
+            # leave val unchanged
+            backtrack(i + 1)
+
+        backtrack(0)
+        return res
 ```
 
