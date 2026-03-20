@@ -147,4 +147,7 @@ there is a new pattern, known as man in the middle search, which i was not aware
 
 so we need to answer how does MITM search work and why this pattern can be applied to this pattern.
 
-MITM search
+MITM is a technique where the search space is divided into two parts and a seaparte complete search is done for each part and the results of the search is combined. This is useful because searching two halves of size roughly n/2 can be much cheaper than searching one full space of size n, especially when the original problem has exponential complexity. 
+
+Compared to binary search where we kind of recursively break down the search space into half, MITM search breaks down the search spcae into half ONCE. We literally search on our own and meet in the middle to "get some concensus" bro.
+
