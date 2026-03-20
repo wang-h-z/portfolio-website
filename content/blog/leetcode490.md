@@ -151,3 +151,38 @@ MITM is a technique where the search space is divided into two parts and a seapa
 
 Compared to binary search where we kind of recursively break down the search space into half, MITM search breaks down the search spcae into half ONCE. We literally search on our own and meet in the middle to "get some concensus" bro.
 
+```python
+from collections import defaultdict
+from fractions import Fraction
+
+class Solution:
+    def countSequences(self, nums: List[int], k: int) -> int:
+        left_counter = defaultdict(int)
+        right_counter = defaultdict(int)
+        n = len(nums)
+
+        def helper(l, r, curr, counter):
+            if l > r:
+                counter[curr] += 1
+                return
+
+            helper(l + 1, r, curr * nums[l], counter)              # multiply
+            helper(l + 1, r, curr / nums[l], counter)              # divide
+            helper(l + 1, r, curr, counter)                        # skip
+
+        mid = n // 2
+
+        helper(0, mid, Fraction(1, 1), left_counter)
+        helper(mid + 1, n - 1, Fraction(1, 1), right_counter)
+
+        acc = 0
+        target = Fraction(k, 1)
+        print(left_counter)
+        print(right_counter)
+        for num in left_counter:
+            complement = target / num
+            if complement in right_counter:
+                acc += left_counter[num] * right_counter[complement]
+
+        return acc
+```
