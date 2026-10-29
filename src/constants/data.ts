@@ -84,6 +84,15 @@ export const stripColors = [
 
 export const experiences: Experience[] = [
   {
+    year: 'Jan 2027',
+    title: 'Incoming Software Engineer Intern',
+    company: 'Stripe',
+    description: '',
+    icon: 'work',
+    image: '/assets/experiences/stripe.svg',
+    technologies: [],
+  },
+  {
     year: 'Aug 2026 - Present',
     title: 'Software Engineer Intern',
     company: 'Binance',

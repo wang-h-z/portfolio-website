@@ -135,7 +135,7 @@ export default function Hero() {
 
       {/* Subsection 3: Experience */}
       <section
-        className={`relative min-h-screen flex items-center justify-center ${
+        className={`relative min-h-screen flex items-center justify-center py-24 ${
           theme === 'dark' ? 'bg-zinc-950' : 'bg-white'
         }`}
       >
@@ -151,9 +151,6 @@ export default function Hero() {
           </h2>
 
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-[23px] top-0 bottom-0 w-0.5 bg-zinc-300 dark:bg-zinc-700" />
-
             {/* Experience items */}
             <div className="space-y-8">
               {experiences.map((experience, index) => (
@@ -165,9 +162,14 @@ export default function Hero() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="relative pl-14"
                 >
+                  {/* Timeline line: dot to next dot, so it stops at the last one */}
+                  {index < experiences.length - 1 && (
+                    <div className="absolute left-[23px] top-14 -bottom-10 w-0.5 bg-zinc-300 dark:bg-zinc-700" />
+                  )}
+
                   {/* Timeline dot with image */}
                   <div className="absolute left-0 top-2">
-                    <div className="relative w-12 h-12 rounded-full border-4 border-white dark:border-zinc-950 shadow-md overflow-hidden">
+                    <div className="relative w-12 h-12 rounded-full border-4 border-white dark:border-zinc-950 shadow-md overflow-hidden bg-white">
                       {experience.image && (
                         <Image
                           src={experience.image}
